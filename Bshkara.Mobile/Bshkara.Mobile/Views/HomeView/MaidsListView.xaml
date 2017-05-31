@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView
+    x:Class="Bshkara.Mobile.Views.HomeView.MaidsListView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+    xmlns:homeView="clr-namespace:Bshkara.Mobile.Views.HomeView;assembly=Bshkara.Mobile">
+    <controls:ExtendedListView
+        x:Name="MaidListView"
+        Footer="{Binding .}"
+        HasUnevenRows="True"
+        IsPullToRefreshEnabled="True"
+        IsRefreshing="{Binding IsRefreshing}"
+        ItemsPerPage="{Binding ItemsPerPage}"
+        ItemsSource="{Binding Maids}"
+        LoadMoreCommand="{Binding LoadMoreCommand}"
+        OddRowColor="{StaticResource White}"
+        RefreshCommand="{Binding PullToRefreshCommand}"
+        RowColor="{StaticResource White}"
+        SelectedItem="{Binding SelectedMaid}"
+        SeparatorVisibility="None">
+
+        <!--  Item template  -->
+        <controls:ExtendedListView.ItemTemplate>
+            <DataTemplate>
+                <homeView:MaidViewCell />
+            </DataTemplate>
+        </controls:ExtendedListView.ItemTemplate>
+
+        <!--  Wait window  -->
+        <ListView.FooterTemplate>
+            <DataTemplate>
+                <AbsoluteLayout HeightRequest="25" WidthRequest="25">
+                    <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+                    <ActivityIndicator
+                        AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}"
+                        Color="{StaticResource Primary}" />
+                </AbsoluteLayout>
+            </DataTemplate>
+        </ListView.FooterTemplate>
+
+    </controls:ExtendedListView>
+</ContentView>

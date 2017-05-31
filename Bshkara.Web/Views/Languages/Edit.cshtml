@@ -1,0 +1,9 @@
+﻿@model Bshkara.Core.Entities.LanguageEntity
+@{
+    ViewBag.Title = "Edit language";
+}
+
+@using (Html.BeginForm("Edit", "Languages", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

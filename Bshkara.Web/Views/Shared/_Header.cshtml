@@ -1,0 +1,51 @@
+﻿<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner ">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="index.html">
+                <img src="/assets/pages/img/logo-big-white.png" alt="logo" class="logo-default">
+            </a>
+
+        </div>
+        <!-- END LOGO -->
+
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top">
+           
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="separator hide"> </li>
+
+                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style = "height: 75px" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-toggle" style="display: block">
+                                    <i class="icon-key" style="color:#aeb2c4"></i> 
+                                    <span class="username username-hide-on-mobile" style="color:#aeb2c4"> Log Out </span>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "Account", new {area = ""})" class="dropdown-toggle">
+                                <i class="icon-login"></i>
+                                <span class="username username-hide-on-mobile"> Login </span>
+                            </a>
+                        }
+                    </li>
+                    <!-- END QUICK SIDEBAR TOGGLER -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END PAGE TOP -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>

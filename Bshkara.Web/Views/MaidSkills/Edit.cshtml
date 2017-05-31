@@ -1,0 +1,24 @@
+﻿@model Bshkara.Core.Entities.MaidSkillEntity
+@{
+    ViewBag.Title = "Edit maid skills";
+}
+
+@using (Html.BeginForm("Edit", "MaidSkills", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/global/plugins/select2/css/select2.css"/>
+    <link rel="stylesheet" href="/assets/global/plugins/bootstrap-select/css/select2-bootstrap.css" />
+}
+
+@section Scripts {
+    <script src="/assets/global/plugins/select2/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CountryId").select2();
+        });
+    </script>
+}

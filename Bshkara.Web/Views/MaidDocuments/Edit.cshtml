@@ -1,0 +1,35 @@
+﻿@model Bshkara.Core.Entities.MaidDocumentEntity
+@{
+    ViewBag.Title = "Edit maid documnets";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/global/plugins/select2/css/select2.css" />
+    <link rel="stylesheet" href="/assets/global/plugins/bootstrap-select/css/select2-bootstrap.css"/>
+
+    @Styles.Render("/Assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css")
+}
+
+@using (Html.BeginForm("Edit", "MaidDocuments", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}
+
+@section Scripts {
+    <script src="/assets/global/plugins/select2/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#CountryId").select2();
+        });
+    </script>
+}
+
+@section Plugins {
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js")
+
+    @Scripts.Render("/Assets/pages/scripts/form-fileupload.js")
+}

@@ -1,0 +1,231 @@
+﻿@using Bshkara.Core.Entities
+@using Bshkara.Web.Extentions
+@model Bshkara.Core.Entities.MaidEntity
+
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-female"></i>
+                    <span class="caption-subject bold uppercase">@ViewBag.Title</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hpanel">
+                                @if (ViewData.ModelState.HasNotPropertyErrors())
+                                {
+                                    <div class="alert alert-danger">
+                                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                                    </div>
+                                }
+                                <div class="panel-body">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(model => model.CreatedById)
+
+                                    @if (!User.IsInRole(RoleEntity.AdminRoleName))
+                                    {
+                                        @Html.Hidden("AgencyId", (Guid?) ViewBag.AgencyId)
+                                    }
+
+                                    @Html.HiddenForDateTime("CreatedAt", @Model.CreatedAt)
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    @if (User.IsInRole(RoleEntity.AdminRoleName))
+                                    {
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Agency, htmlAttributes: new {@class = "control-label col-md-2"})
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("AgencyId", null, "-- choose agency --", htmlAttributes: new {@class = "form-control"})
+                                                @Html.ValidationMessageFor(model => model.AgencyId, "", new {@class = "text-danger"})
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                    }
+                                    
+                                    <div class="form-group" id="AgencyPackage">
+                                        @Html.LabelFor(model => model.AgencyPackage, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("AgencyPackageId", null, "-- choose agency package --", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.AgencyPackageId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.LivingCity, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("LivingCityId", null, "-- choose city --", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.LivingCityId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("NationalityId", null, "-- choose nationality --", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.NationalityId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.DateOfBirth, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.DateOfBirth, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Gender, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EnumDropDownListFor(t => t.Gender, new {@class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Weight, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Weight, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Weight, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Height, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Height, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Height, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.MaritalStatus, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EnumDropDownListFor(t => t.MaritalStatus, new {@class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NoOfChildren, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.NoOfChildren, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.NoOfChildren, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Religion, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EnumDropDownListFor(t => t.Religion, new {@class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Address, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Address, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Address, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Phone, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Phone, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Education, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Education, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Education, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.VisaStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("VisaStatusId", null, "-- choose visa status --", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.VisaStatusId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.YearsOfExperience, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.YearsOfExperience, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.YearsOfExperience, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Salary, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Salary, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Salary, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Availability, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10" style="padding-top: 7px">
+                                            @Html.CheckBoxFor(model => model.Availability, new {@class = "icheck"})
+                                            @Html.ValidationMessageFor(model => model.Availability, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Photo, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.HiddenFor(model => model.Photo, new {id = "uploaded-image-path"})
+                                            @Html.ValidationMessageFor(model => model.Photo, "", new {@class = "text-danger"})
+
+                                            <span class="btn green fileinput-button">
+                                                <i class="fa fa-file-image-o"></i>
+                                                <span> Add/Change image... </span>
+                                                <input type="file" id="file-upload" accept="image/*">
+                                            </span>
+                                            <img id="uploaded-image" src="@Model.Photo" width="auto" height="200px"/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Note, new {@class = "control-label col-md-2"})
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Note, new {htmlAttributes = new {@class = "form-control", autofocus = "autofocus"}})
+                                            @Html.ValidationMessageFor(model => model.Note, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <button type="submit" class="btn green">
+                                                <i class="fa fa-check"></i> Save
+                                            </button>
+                                            <button type="button" onclick="history.go(-1);" class="btn default">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+﻿@using Bshkara.Web.Extentions
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>Bashkara - @ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+    @Styles.Render("~/GlobalMandatoryStyle/css")
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    @Styles.Render("~/ThemeGlobalStyle/css")
+    <!-- END THEME GLOBAL STYLES -->
+
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    @Styles.Render("~/Theme4/css")
+    <!-- END THEME LAYOUT STYLES -->
+
+    <!-- BEGIN LAYOUT SCRIPTS -->
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("styles", required: false)}
+    <!-- END LAYOUT SCRIPTS -->
+
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+
+<body class="@Html.PageClass()">
+
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <!-- BEGIN PAGE BASE CONTENT -->
+            @RenderBody()
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+
+<!-- BEGIN CORE PLUGINS -->
+@Scripts.Render("~/CorePluginsScripts/js")
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN LAYOUT PLUGINS -->
+@RenderSection("plugins", required: false)
+<!-- END LAYOUT PLUGINS --
+
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+@Scripts.Render("~/ThemeGlobalScripts/js")
+<!-- END THEME GLOBAL SCRIPTS -->
+
+<!-- BEGIN LAYOUT SCRIPTS -->
+@RenderSection("scripts", required: false)
+<!-- END LAYOUT SCRIPTS -->
+
+
+</body>
+
+</html>

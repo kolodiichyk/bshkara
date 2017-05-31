@@ -1,0 +1,157 @@
+﻿@using Bshkara.Core.Entities
+@using Bshkara.Web.Extentions
+@using Microsoft.AspNet.Identity
+
+@{
+    var agency = User.Identity.GetAgency();
+}
+
+<div class="page-sidebar-wrapper">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar navbar-collapse collapse">
+        @if (agency != null)
+        {
+            <div class="mt-widget-1">
+                <div class="mt-img" style="margin: 40px 0 10px;">
+                    <img src="@agency.Logo" width="70px" height="70px">
+                </div>
+                <div class="mt-body" style="margin: 10px 0 20px;">
+                    <h3 class="mt-username">@agency.Name.Default</h3>
+                </div>
+            </div>
+        }
+
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <li class="nav-item active start open ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-book"></i>
+                    <span class="title">Bashkra</span>
+                    <span class="arrow"></span>
+                </a>
+
+                <ul class="sub-menu">
+                    @if (User.IsInRole(RoleEntity.AgentAdminRoleName) || User.IsInRole(RoleEntity.AgentUserRoleName))
+                    {
+                        <li class="nav-item @Html.IsSelected("Maids")">
+                            <a href="@Url.Action("Index", "Maids", new {area = ""})" class="nav-link">
+                                <i class="fa fa-female"></i>
+                                <span class="title">Maids</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @Html.IsSelected("Booking")">
+                            <a href="@Url.Action("Index", "Booking", new {area = ""})" class="nav-link">
+                                <i class="fa fa-envelope"></i>
+                                <span class="title">Requests to hire</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(RoleEntity.AgentAdminRoleName))
+                    {
+                        User.Identity.GetUserId();
+
+                        <li class="nav-item @Html.IsSelected("AgencyUsers")">
+                            <a href="@Url.Action("Index", "AgencyUsers", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-user"></i>
+                                <span class="title">Users</span>
+                            </a>
+                        </li>
+
+                        if (agency != null)
+                         {
+                             <li class="nav-item @Html.IsSelected("Agencies")">
+                                 <a href="/Profile/@agency.Id" class="nav-link ">
+                                     <i class="fa fa-bank"></i>
+                                     <span class="title">Profile</span>
+                                 </a>
+                             </li>
+                         }
+                    }
+                </ul>
+
+                @if (User.IsInRole(RoleEntity.AdminRoleName))
+                {
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-table"></i>
+                        <span class="title">Dictionaries</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <!-- Admin table data -->
+                    <ul class="sub-menu">
+                        <li class="nav-item @Html.IsSelected("Agencies")">
+                            <a href="@Url.Action("Index", "Agencies", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-bank"></i>
+                                <span class="title">Agencies</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Countries")">
+                            <a href="@Url.Action("Index", "Countries", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-globe"></i>
+                                <span class="title">Countries</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Cities")">
+                            <a href="@Url.Action("Index", "Cities", new {area = ""})" class="nav-link ">
+                                <i class="fa-building"></i>
+                                <span class="title">Cities</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Languages")">
+                            <a href="@Url.Action("Index", "Languages", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-language"></i>
+                                <span class="title">Languages</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Nationalities")">
+                            <a href="@Url.Action("Index", "Nationalities", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-flag"></i>
+                                <span class="title">Nationalities</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Skills")">
+                            <a href="@Url.Action("Index", "Skills", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-tags"></i>
+                                <span class="title">Skills</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("VisaStatus")">
+                            <a href="@Url.Action("Index", "VisaStatus", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-credit-card"></i>
+                                <span class="title">Visa status</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Packs")">
+                            <a href="@Url.Action("Index", "Packs", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-gift"></i>
+                                <span class="title">Packages</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("Passports")">
+                            <a href="@Url.Action("Index", "Passports", new {area = ""})" class="nav-link ">
+                                <i class="fa fa-book"></i>
+                                <span class="title">Passports</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected("DocumentTypes")">
+                            <a href="@Url.Action("Index", "DocumentTypes", new {area = ""})" class="nav-link ">
+                                <i class="fa-thumb-tack"></i>
+                                <span class="title">Document types</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- API -->
+                    <li class="nav-item @Html.IsSelected("Help")">
+                        <a href="@Url.Action("Index", "Help", new {area = "ApiHelp"})" class="nav-link ">
+                            <i class="fa fa-cloud"></i>
+                            <span class="title">API</span>
+                        </a>
+                    </li>
+                }
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+</div>

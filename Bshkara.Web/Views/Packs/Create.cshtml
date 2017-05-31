@@ -1,0 +1,10 @@
+﻿@model Bshkara.Core.Entities.PackageEntity
+
+@{
+    ViewBag.Title = "Add package";
+}
+
+@using (Html.BeginForm("Create", "Packs", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

@@ -1,0 +1,18 @@
+﻿@using Bshkara.Core.Entities
+@using Bshkara.Web.ViewModels
+@using PagedList
+@model Bshkara.Core.Entities.CityEntity
+
+@{
+    ViewBag.Title = "Edit city";
+}
+
+
+<div class="row">
+    <div class="col-md-12 ">
+        @using (Html.BeginForm("Edit", "Citties", new { ViewBag.ReturnUrl }, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("_CreateOrEdit")
+        }
+    </div>
+</div>

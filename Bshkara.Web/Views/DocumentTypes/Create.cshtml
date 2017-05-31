@@ -1,0 +1,24 @@
+﻿@model Bshkara.Core.Entities.DocumentTypeEntity
+
+@{
+    ViewBag.Title = "Add document types";
+}
+
+
+@section Styles {
+    @Styles.Render("/Assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css")
+}
+
+@using (Html.BeginForm("Create", "DocumentTypes", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}
+
+@section Plugins {
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js")
+
+    @Scripts.Render("/Assets/pages/scripts/form-imageupload.js")
+}

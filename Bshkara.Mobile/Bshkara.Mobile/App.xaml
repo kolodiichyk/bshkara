@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Application
+    x:Class="Bshkara.Mobile.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:converters="clr-namespace:Bshkara.Mobile.Helpers.Converters;assembly=Bshkara.Mobile">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!--  Colors  -->
+            <Color x:Key="Primary">#721DB1</Color>
+            <Color x:Key="PrimaryDark">#721DB1</Color>
+            <Color x:Key="Accent">#EEC4F8</Color>
+            <Color x:Key="LightAccent">#F7F0FA</Color>
+            <Color x:Key="LightGray">#C7C7C7</Color>
+            <Color x:Key="DarkWhite">#F2F2F2</Color>
+            <Color x:Key="LightWhite">#FAFAFA</Color>
+            <Color x:Key="Gray">#B1B1B1</Color>
+            <Color x:Key="DarkGray">#949494</Color>
+            <Color x:Key="Blue">#1D49A4</Color>
+            <Color x:Key="Black">#232323</Color>
+            <Color x:Key="Green">#28D200</Color>
+            <Color x:Key="Red">#D20000</Color>
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="LightBlue">#55ACED</Color>
+
+
+            <!--  Converters  -->
+            <converters:ToUpperConverter x:Key="ToUpperConverter" />
+            <converters:ToFormatedDateConverter x:Key="ToFormatedDateConverter" />
+            <converters:InvertBoolConverter x:Key="InvertBoolConverter" />
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
+            <converters:EnumerableCountConverter x:Key="EnumerableCountConverter" />
+            <converters:YearsFromDateConverter x:Key="YearsFromDateConverter" />
+            <converters:SkillUnactivedImageConverter x:Key="SkillUnactivedImageConverter" />
+
+            <!--  Labels  -->
+            <Style TargetType="controls:ExtendedLabel">
+                <Setter Property="FontFamily" Value="VarelaRound-Regular" />
+            </Style>
+
+            <!--  Entry  -->
+            <Style TargetType="controls:ExtendedEntry">
+                <Setter Property="Font" Value="VarelaRound-Regular" />
+            </Style>
+
+            <!--  Buttons  -->
+            <Style TargetType="controls:ExtendedButton">
+                <Setter Property="Font" Value="VarelaRound-Regular" />
+            </Style>
+            <Style TargetType="controls:ImageButton">
+                <Setter Property="Font" Value="VarelaRound-Regular" />
+            </Style>
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

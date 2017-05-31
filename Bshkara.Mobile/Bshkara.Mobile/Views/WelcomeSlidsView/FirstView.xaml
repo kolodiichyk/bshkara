@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView
+    x:Class="Bshkara.Mobile.Views.WelcomeSlidsView.FirstView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    BackgroundColor="{StaticResource White}">
+    <Grid Padding="50,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="130" />
+        </Grid.RowDefinitions>
+
+        <controls:ExtendedLabel
+            Grid.Row="0"
+            FontSize="25"
+            HorizontalTextAlignment="Center"
+            Text="Welcome to Bshraka!"
+            TextColor="{StaticResource Primary}"
+            VerticalTextAlignment="Center" />
+
+        <ContentView
+            Grid.Row="1"
+            Padding="30,0"
+            HorizontalOptions="FillAndExpand">
+            <forms:CachedImage
+                Aspect="AspectFit"
+                CacheType="Disk"
+                HeightRequest="5"
+                HorizontalOptions="FillAndExpand"
+                Source="wave_line.png" />
+        </ContentView>
+
+        <ContentView Grid.Row="2" Padding="0,30">
+            <forms:CachedImage
+                Aspect="AspectFit"
+                CacheType="Disk"
+                Source="welcome01.png" />
+        </ContentView>
+
+        <controls:ExtendedLabel
+            Grid.Row="3"
+            FontSize="14"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Text="Find and Book your Maid anywhere in the UAE in a swipe!"
+            TextColor="{StaticResource Gray}"
+            VerticalOptions="Start"
+            VerticalTextAlignment="Start" />
+
+    </Grid>
+</ContentView>

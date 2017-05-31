@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView x:Class="Bshkara.Mobile.Views.HomeView.MaidsGridView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:controls1="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+             xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <controls1:ExtendedGridView x:Name="MaidsGrdView"
+                                ColumnSpacing="0"
+                                ItemsSource="{Binding Maids}"
+                                RowSpacing="0"
+                                SelectedItem="{Binding SelectedMaid}">
+        <controls1:ExtendedGridView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <ContentView BackgroundColor="{StaticResource Accent}" Padding="0.5">
+                            <Grid BackgroundColor="White" Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                </Grid.RowDefinitions>
+
+                                <RelativeLayout Grid.Row="0" Grid.RowSpan="2">
+                                    <forms:CachedImage Aspect="AspectFill"
+                                                       DownsampleToViewSize="True"
+                                                       LoadingPlaceholder="image_placeholder"
+                                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                              Property=Width,
+                                                                                                              Constant=-20}"
+                                                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                             Property=Width,
+                                                                                                             Constant=-20}"
+                                                       Source="{Binding Photo}"
+                                                       TranslationX="10" />
+
+                                    <forms:CachedImage Aspect="AspectFill"
+                                                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                              Property=Width,
+                                                                                                              Constant=-20}"
+                                                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                             Property=Width,
+                                                                                                             Constant=-20}"
+                                                       Source="image_border.png"
+                                                       TranslationX="10" />
+                                </RelativeLayout>
+
+                                <controls1:Skills Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  ItemsSource="{Binding Skills}"
+                                                  Padding="0,0,0,0" />
+
+                                <Grid Grid.Row="2"
+                                      Grid.Column="0"
+                                      ColumnSpacing="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <fontAwesomeIcon:FontAwesomeIcon Grid.Column="1"
+                                                                     FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-globe"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+
+                                    <controls:ExtendedLabel Grid.Column="2"
+                                                            FontSize="16"
+                                                            HorizontalTextAlignment="Center"
+                                                            Text="{Binding Languages,
+                                                                           Converter={StaticResource EnumerableCountConverter},
+                                                                           StringFormat='+{0}'}"
+                                                            TextColor="{StaticResource Primary}"
+                                                            VerticalTextAlignment="Center" />
+
+                                    <fontAwesomeIcon:FontAwesomeIcon Grid.Column="4"
+                                                                     FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-briefcase"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+
+                                    <controls:ExtendedLabel Grid.Column="5"
+                                                            FontSize="16"
+                                                            HorizontalTextAlignment="Center"
+                                                            Text="{Binding EmploymentHistory,
+                                                                           Converter={StaticResource EnumerableCountConverter},
+                                                                           StringFormat='+{0}'}"
+                                                            TextColor="{StaticResource Primary}"
+                                                            VerticalTextAlignment="Center" />
+
+
+                                    <fontAwesomeIcon:FontAwesomeIcon Grid.Column="7"
+                                                                     FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-history"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+
+                                    <controls:ExtendedLabel Grid.Column="8"
+                                                            FontSize="16"
+                                                            HorizontalTextAlignment="Center"
+                                                            Text="{Binding DateOfBirth,
+                                                                           Converter={StaticResource YearsFromDateConverter}}"
+                                                            TextColor="{StaticResource Primary}"
+                                                            VerticalTextAlignment="Center" />
+
+                                </Grid>
+
+                            </Grid>
+                        </ContentView>
+
+                        <!--
+                        <Grid ColumnSpacing="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <controls1:Skills Grid.Row="0"
+                                              Grid.Column="0"
+                                              BackgroundColor="Transparent"
+                                              IsVisible="False"
+                                              ItemsSource="{Binding Skills}"
+                                              Padding="0,0,0,0" />
+
+                            <RelativeLayout Grid.Row="1"
+                                            Grid.RowSpan="2"
+                                            IsVisible="False"
+                                            Padding="10">
+                                <forms:CachedImage Aspect="AspectFill"
+                                                   DownsampleToViewSize="True"
+                                                   LoadingPlaceholder="image_placeholder"
+                                                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                          Property=Height,
+                                                                                                          Constant=-10}"
+                                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                         Property=Width,
+                                                                                                         Constant=-10}"
+                                                   Source="{Binding Photo}" />
+
+                                <forms:CachedImage Aspect="AspectFill"
+                                                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                          Property=Height,
+                                                                                                          Constant=-10}"
+                                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                         Property=Width,
+                                                                                                         Constant=-10}"
+                                                   Source="image_border" />
+                            </RelativeLayout>
+                            <StackLayout Grid.Row="2"
+                                         Grid.Column="0"
+                                         BackgroundColor="Aqua"
+                                         Orientation="Horizontal"
+                                         Spacing="0">
+                                <fontAwesomeIcon:FontAwesomeIcon FontSize="16"
+                                                                 HorizontalTextAlignment="Center"
+                                                                 Icon="fa-globe"
+                                                                 TextColor="{StaticResource Gray}"
+                                                                 VerticalTextAlignment="Center" />
+
+                                <controls:ExtendedLabel FontSize="16"
+                                                        HorizontalTextAlignment="Center"
+                                                        Text="{Binding Languages,
+                                                                       Converter={StaticResource EnumerableCountConverter},
+                                                                       StringFormat='+{0}'}"
+                                                        TextColor="{StaticResource Primary}"
+                                                        VerticalTextAlignment="Center" />
+                            </StackLayout>
+
+                            <Grid Grid.Row="2"
+                                  BackgroundColor="Aqua"
+                                  ColumnSpacing="0"
+                                  IsVisible="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <fontAwesomeIcon:FontAwesomeIcon FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-globe"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </Grid>
+
+                            <Grid Grid.Row="2"
+                                  BackgroundColor="Aqua"
+                                  ColumnSpacing="0"
+                                  IsVisible="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0"
+                                             BackgroundColor="Fuchsia"
+                                             Orientation="Horizontal"
+                                             Spacing="0">
+                                    <fontAwesomeIcon:FontAwesomeIcon FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-globe"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+
+                                    <controls:ExtendedLabel FontSize="16"
+                                                            HorizontalTextAlignment="Center"
+                                                            Text="{Binding Languages,
+                                                                           Converter={StaticResource EnumerableCountConverter},
+                                                                           StringFormat='+{0}'}"
+                                                            TextColor="{StaticResource Primary}"
+                                                            VerticalTextAlignment="Center" />
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1"
+                                             Orientation="Horizontal"
+                                             Spacing="0">
+                                    <fontAwesomeIcon:FontAwesomeIcon FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-briefcase"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+
+                                    <controls:ExtendedLabel FontSize="16"
+                                                            HorizontalTextAlignment="Center"
+                                                            Text="{Binding EmploymentHistory,
+                                                                           Converter={StaticResource EnumerableCountConverter},
+                                                                           StringFormat='+{0}'}"
+                                                            TextColor="{StaticResource Primary}"
+                                                            VerticalTextAlignment="Center" />
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="2"
+                                             Orientation="Horizontal"
+                                             Spacing="0">
+                                    <fontAwesomeIcon:FontAwesomeIcon FontSize="16"
+                                                                     HorizontalTextAlignment="Center"
+                                                                     Icon="fa-history"
+                                                                     TextColor="{StaticResource Gray}"
+                                                                     VerticalTextAlignment="Center" />
+
+                                    <controls:ExtendedLabel FontSize="16"
+                                                            HorizontalTextAlignment="Center"
+                                                            Text="{Binding DateOfBirth,
+                                                                           Converter={StaticResource YearsFromDateConverter}}"
+                                                            TextColor="{StaticResource Primary}"
+                                                            VerticalTextAlignment="Center" />
+                                </StackLayout>
+
+                            </Grid>
+                        </Grid>-->
+
+
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </controls1:ExtendedGridView.ItemTemplate>
+    </controls1:ExtendedGridView>
+</ContentView>

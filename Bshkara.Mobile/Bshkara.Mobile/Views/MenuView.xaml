@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.MenuView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    BackgroundColor="{StaticResource White}"
+    Opacity="0.9">
+    <Grid Padding="20,40,20,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <controls:ExtendedListView
+            Grid.Row="0"
+            ItemsSource="{Binding MenuItems}"
+            SelectedItem="{Binding SelectedItem}"
+            SeparatorVisibility="None">
+            <controls:ExtendedListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView>
+
+                            <ContentView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsSelected}"
+                                    TargetType="ContentView"
+                                    Value="true">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding IsSelected}"
+                                    TargetType="ContentView"
+                                    Value="false">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                                </DataTrigger>
+                            </ContentView.Triggers>
+
+                            <controls:ExtendedLabel
+                                FontSize="23"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Item.Name}"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center">
+
+                                <controls:ExtendedLabel.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsSelected}"
+                                        TargetType="controls:ExtendedLabel"
+                                        Value="true">
+                                        <Setter Property="TextColor" Value="{StaticResource White}" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding IsSelected}"
+                                        TargetType="controls:ExtendedLabel"
+                                        Value="false">
+                                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                    </DataTrigger>
+                                </controls:ExtendedLabel.Triggers>
+                            </controls:ExtendedLabel>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </controls:ExtendedListView.ItemTemplate>
+        </controls:ExtendedListView>
+
+        <controls:ExtendedLabel
+            Grid.Row="1"
+            FontSize="23"
+            HorizontalTextAlignment="Center"
+            Text="Logout"
+            TextColor="{StaticResource Primary}"
+            VerticalOptions="End"
+            VerticalTextAlignment="Center">
+            <controls:ExtendedLabel.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+            </controls:ExtendedLabel.GestureRecognizers>
+        </controls:ExtendedLabel>
+    </Grid>
+</mvvm:BaseView>

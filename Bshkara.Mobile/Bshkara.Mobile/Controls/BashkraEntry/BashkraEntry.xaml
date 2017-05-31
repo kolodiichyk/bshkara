@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<ContentView
+    x:Class="Bshkara.Mobile.Controls.BashkraEntry.BashkraEntry"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:roundedBoxView="clr-namespace:Bshkara.Mobile.Controls.RoundedBoxView;assembly=Bshkara.Mobile">
+    <RelativeLayout HeightRequest="36">
+        <roundedBoxView:RoundedBoxView
+            x:Name="InnerBoxView"
+            BackgroundColor="{StaticResource White}"
+            BorderColor="{StaticResource LightGray}"
+            CornerRadius="3"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width}">
+            <roundedBoxView:RoundedBoxView.BorderThickness>
+                <OnPlatform
+                    x:TypeArguments="x:Int32"
+                    Android="2"
+                    iOS="1" />
+            </roundedBoxView:RoundedBoxView.BorderThickness>
+        </roundedBoxView:RoundedBoxView>
+        <controls:ExtendedEntry
+            x:Name="InnerEntry"
+            BackgroundColor="Transparent"
+            Font="VarelaRound-Regular"
+            HasBorder="False"
+            HeightRequest="24"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Start"
+            MaxLength="50"
+            PlaceholderTextColor="{StaticResource LightGray}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Constant=-10}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Factor=0.5,
+                                                              Constant=-8}"
+            TextColor="{StaticResource DarkGray}"
+            VerticalOptions="CenterAndExpand">
+            <controls:ExtendedEntry.TranslationX>
+                <OnPlatform
+                    x:TypeArguments="x:Double"
+                    Android="5"
+                    iOS="10" />
+            </controls:ExtendedEntry.TranslationX>
+        </controls:ExtendedEntry>
+    </RelativeLayout>
+</ContentView>

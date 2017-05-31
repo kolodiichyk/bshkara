@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X5k-f2-b5h">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gAE-YM-kbH">
+            <objects>
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="logo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" misplaced="YES">
+                                <rect key="frame" x="270" y="270" width="60" height="60"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
+                            <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                        </constraints>
+                        <color key="tintColor" colorSpace="calibratedRGB" red="0" green="0.52549019607843139" blue="1" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.44705882352941179" green="0.11372549019607843" blue="0.69411764705882351" alpha="1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="339"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon-60.png" width="60" height="60"/>
+        <image name="add_review.png" width="108" height="108"/>
+        <image name="blackhint.png" width="160" height="74"/>
+        <image name="bshkara.png" width="349" height="200"/>
+        <image name="checked.png" width="42" height="43"/>
+        <image name="facebook.png" width="64" height="64"/>
+        <image name="Icon-Small-40.png" width="40" height="40"/>
+        <image name="Icon-Small.png" width="29" height="29"/>
+        <image name="icon.png" width="48" height="48"/>
+        <image name="image_border.png" width="227" height="227"/>
+        <image name="image_placeholder.png" width="290" height="281"/>
+        <image name="language_bg.png" width="104" height="48"/>
+        <image name="level_fair.png" width="65" height="65"/>
+        <image name="level_fulent.png" width="65" height="65"/>
+        <image name="level_little.png" width="65" height="65"/>
+        <image name="level_poor.png" width="65" height="65"/>
+        <image name="maid.png" width="285" height="381"/>
+        <image name="maidoptions.png" width="195" height="195"/>
+        <image name="more.png" width="108" height="108"/>
+        <image name="my_favorit.png" width="108" height="108"/>
+        <image name="pinkbottombg.png" width="849" height="176"/>
+        <image name="search.png" width="66" height="66"/>
+        <image name="search_gray.png" width="66" height="66"/>
+        <image name="slider-default-handle-disabled.png" width="23" height="23"/>
+        <image name="slider-default-handle-highlighted.png" width="23" height="23"/>
+        <image name="slider-default-handle.png" width="23" height="23"/>
+        <image name="slider-default-track.png" width="11" height="9"/>
+        <image name="slider-default-trackBackground.png" width="11" height="9"/>
+        <image name="slider-default-trackCrossedOver.png" width="11" height="9"/>
+        <image name="slider-default_trackBackground.png" width="11" height="9"/>
+        <image name="slider-default7-handle-disabled.png" width="43" height="43"/>
+        <image name="slider-default7-handle.png" width="43" height="43"/>
+        <image name="slider-default7-track.png" width="6" height="4"/>
+        <image name="slider-default7-trackBackground.png" width="6" height="4"/>
+        <image name="slider-default7-trackCrossedOver.png" width="6" height="4"/>
+        <image name="surprise_me.png" width="108" height="108"/>
+        <image name="twitter.png" width="64" height="64"/>
+        <image name="unchecked.png" width="42" height="43"/>
+        <image name="user.png" width="66" height="66"/>
+        <image name="logo2.png" width="225" height="225"/>
+        <image name="picture.png" width="62" height="62"/>
+        <image name="slide_dot.png" width="28" height="28"/>
+        <image name="wave_line.png" width="274" height="11"/>
+        <image name="welcome01.png" width="535" height="564"/>
+    </resources>
+</document>

@@ -1,0 +1,58 @@
+﻿@using Bshkara.Web.Extentions
+@model Bshkara.Web.Models.RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_Blank.cshtml";
+    ViewBag.Title = "Register";
+}
+
+@section Styles {
+    @Styles.Render("~/RegisterStyles/css")
+}
+
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <a href="index.html">
+        <img src="../assets/pages/img/logo-big.png" alt="" />
+    </a>
+</div>
+<!-- END LOGO -->
+
+<!-- BEGIN LOGIN -->
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h3 class="form-title font-green">Create a new account</h3>
+        @Html.ValidationSummary("", new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new {@class = "control-label visible-ie8 visible-ie9"})
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control", @placeholder = BshkaraRes.Login_Email})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Agency.Name, new {@class = "control-label visible-ie8 visible-ie9"})
+            @Html.TextBoxFor(m => m.Agency.Name.En, new {@class = "form-control", @placeholder = BshkaraRes.Login_AgencyName})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PackageId, new { @class = "control-label visible-ie8 visible-ie9" })
+            @Html.DropDownList("PackageId", null, "-- choose package --", htmlAttributes: new { @class = "form-control", @placeholder = BshkaraRes.Login_AgencyName })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new {@class = "control-label visible-ie8 visible-ie9" })
+            @Html.PasswordFor(m => m.Password, new {@class = "form-control", @placeholder = BshkaraRes.Login_Password })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new {@class = "control-label visible-ie8 visible-ie9"})
+            @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control", @placeholder = BshkaraRes.Login_ConfirmPassword})
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn green uppercase" style="width: 100%">@BshkaraRes.Register_Register</button>
+        </div>
+    }
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

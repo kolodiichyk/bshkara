@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.WelcomeSlidsView.WelcomeSlidsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:carouselLayout="clr-namespace:Bshkara.Mobile.Controls.CarouselLayout;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    xmlns:welcomeSlidsView="clr-namespace:Bshkara.Mobile.Views.WelcomeSlidsView;assembly=Bshkara.Mobile">
+
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <RelativeLayout>
+        <carouselLayout:CarouselLayout
+            x:Name="CarouselSwipeLayout"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Height}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <carouselLayout:CarouselLayout.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="0, 0, 0, 0"
+                    WinPhone="0, 0, 0, 0"
+                    iOS="0, 30, 0, 0" />
+            </carouselLayout:CarouselLayout.Padding>
+            <carouselLayout:CarouselLayout.Children>
+                <welcomeSlidsView:FirstView BindingContext="{Binding FirstView}" />
+                <welcomeSlidsView:SecondView BindingContext="{Binding SecondView}" />
+                <welcomeSlidsView:ThirdView BindingContext="{Binding ThirdView}" />
+                <welcomeSlidsView:FourthView BindingContext="{Binding FourthView}" />
+            </carouselLayout:CarouselLayout.Children>
+        </carouselLayout:CarouselLayout>
+
+
+        <Grid
+            Padding="20,0"
+            HeightRequest="20"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Constant=-50}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <controls:ExtendedLabel
+                Grid.Column="0"
+                FontSize="16"
+                HorizontalOptions="StartAndExpand"
+                HorizontalTextAlignment="Start"
+                IsVisible="{Binding SkipVisibility}"
+                Text="Skip"
+                TextColor="{StaticResource Primary}"
+                VerticalTextAlignment="Center">
+                <controls:ExtendedLabel.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SkipCommand}" />
+                </controls:ExtendedLabel.GestureRecognizers>
+            </controls:ExtendedLabel>
+
+            <carouselLayout:CarouselIndicator
+                x:Name="CarouselIndicator"
+                Grid.Column="1"
+                HeightRequest="10"
+                HorizontalOptions="Center"
+                ItemSource="{Binding Views}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=0.5,
+                                                                  Constant=-25}"
+                SelectedItem="{Binding Source={x:Reference CarouselSwipeLayout}, Path=SelectedIndex, Mode=TwoWay}"
+                VerticalOptions="Center"
+                WidthRequest="50">
+                <carouselLayout:CarouselIndicator.Template>
+                    <DataTemplate>
+                        <carouselLayout:CarouselDotIndicator />
+                    </DataTemplate>
+                </carouselLayout:CarouselIndicator.Template>
+            </carouselLayout:CarouselIndicator>
+
+            <controls:ExtendedLabel
+                Grid.Column="2"
+                FontSize="16"
+                HorizontalOptions="EndAndExpand"
+                HorizontalTextAlignment="End"
+                IsVisible="{Binding NextVisibility}"
+                Text="Next"
+                TextColor="{StaticResource Primary}"
+                VerticalTextAlignment="Center">
+                <controls:ExtendedLabel.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NextCommand}" />
+                </controls:ExtendedLabel.GestureRecognizers>
+            </controls:ExtendedLabel>
+
+            <controls:ExtendedLabel
+                Grid.Column="2"
+                FontSize="16"
+                HorizontalOptions="EndAndExpand"
+                HorizontalTextAlignment="End"
+                IsVisible="{Binding GotItVisibility}"
+                Text="Got it"
+                TextColor="{StaticResource Primary}"
+                VerticalTextAlignment="Center">
+                <controls:ExtendedLabel.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SkipCommand}" />
+                </controls:ExtendedLabel.GestureRecognizers>
+            </controls:ExtendedLabel>
+
+        </Grid>
+
+    </RelativeLayout>
+</mvvm:BaseView>

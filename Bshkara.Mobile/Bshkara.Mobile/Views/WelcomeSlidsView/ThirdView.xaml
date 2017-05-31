@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView
+    x:Class="Bshkara.Mobile.Views.WelcomeSlidsView.ThirdView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    BackgroundColor="{StaticResource White}">
+    <controls:ExtendedLabel
+        FontSize="40"
+        HorizontalTextAlignment="Center"
+        Rotation="45"
+        Text="Comming soon..."
+        TextColor="{StaticResource Primary}"
+        VerticalTextAlignment="Center" />
+</ContentView>

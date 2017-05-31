@@ -1,0 +1,842 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.MaidDetailsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:controls1="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+    xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    xmlns:roundedBoxView="clr-namespace:Bshkara.Mobile.Controls.RoundedBoxView;assembly=Bshkara.Mobile"
+    xmlns:toolbar="clr-namespace:Bshkara.Mobile.Controls.Toolbar;assembly=Bshkara.Mobile"
+    BackgroundColor="{StaticResource White}">
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <toolbar:Toolbar
+            Title="Maid Profile"
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            ShowDropDownIcon="False">
+            <toolbar:Toolbar.LeftToolbarItems>
+                <fontAwesomeIcon:FontAwesomeIcon
+                    Command="{Binding GoBackCommand}"
+                    FontSize="30"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
+                    Icon="fa-angle-left"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="40" />
+            </toolbar:Toolbar.LeftToolbarItems>
+        </toolbar:Toolbar>
+
+        <ScrollView Grid.Row="1">
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="0.5" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.5" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    ColumnSpacing="0"
+                    RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Maid picture  -->
+                    <RelativeLayout
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
+                        Grid.Column="0">
+                        <forms:CachedImage
+                            Aspect="AspectFill"
+                            DownsampleHeight="120"
+                            DownsampleWidth="120"
+                            HeightRequest="120"
+                            LoadingPlaceholder="image_placeholder"
+                            Source="{Binding Maid.Photo}"
+                            WidthRequest="120" />
+
+                        <forms:CachedImage
+                            Aspect="AspectFill"
+                            HeightRequest="120"
+                            Source="image_border.png"
+                            WidthRequest="120" />
+
+                        <roundedBoxView:RoundedBoxView
+                            CornerRadius="11.5"
+                            HeightRequest="23"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                              Property=X,
+                                                                              Factor=0,
+                                                                              Constant=20}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                              Property=Height,
+                                                                              Factor=0,
+                                                                              Constant=100}"
+                            WidthRequest="80">
+                            <roundedBoxView:RoundedBoxView.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Maid.Availability}"
+                                    TargetType="roundedBoxView:RoundedBoxView"
+                                    Value="False">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Red}" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding Maid.Availability}"
+                                    TargetType="roundedBoxView:RoundedBoxView"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Green}" />
+                                </DataTrigger>
+                            </roundedBoxView:RoundedBoxView.Triggers>
+                        </roundedBoxView:RoundedBoxView>
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HeightRequest="25"
+                            HorizontalTextAlignment="Center"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                              Property=X,
+                                                                              Factor=0,
+                                                                              Constant=20}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                              Property=Height,
+                                                                              Factor=0,
+                                                                              Constant=100}"
+                            TextColor="White"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80">
+
+                            <controls:ExtendedLabel.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Maid.Availability}"
+                                    TargetType="controls:ExtendedLabel"
+                                    Value="False">
+                                    <Setter Property="Text" Value="BOOKED" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding Maid.Availability}"
+                                    TargetType="controls:ExtendedLabel"
+                                    Value="True">
+                                    <Setter Property="Text" Value="AVIABILE" />
+                                </DataTrigger>
+                            </controls:ExtendedLabel.Triggers>
+                        </controls:ExtendedLabel>
+
+                    </RelativeLayout>
+
+                    <!--  Salery  -->
+                    <RelativeLayout
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Padding="0,10">
+                        <roundedBoxView:RoundedBoxView
+                            BackgroundColor="{StaticResource Blue}"
+                            CornerRadius="11.5"
+                            HeightRequest="23"
+                            TranslationY="10"
+                            WidthRequest="80" />
+
+                        <controls:ExtendedLabel
+                            FontSize="10"
+                            HeightRequest="25"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding Maid.Salary, StringFormat='{0} AED'}"
+                            TextColor="White"
+                            TranslationY="10"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                    </RelativeLayout>
+
+                    <!--  Maid name and address  -->
+                    <StackLayout
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalOptions="FillAndExpand"
+                        Orientation="Vertical"
+                        Spacing="0"
+                        VerticalOptions="Center">
+                        <controls:ExtendedLabel
+                            FontSize="17"
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding Maid.Name}"
+                            TextColor="{StaticResource Primary}" />
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding Maid.Address}"
+                            TextColor="{StaticResource Gray}" />
+                    </StackLayout>
+
+                    <!--  Maid langueges, age and count of work history  -->
+                    <Grid
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Padding="0,10"
+                        ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout
+                            Grid.Column="0"
+                            Orientation="Horizontal"
+                            Spacing="3">
+                            <fontAwesomeIcon:FontAwesomeIcon
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                Icon="fa-globe"
+                                TextColor="{StaticResource Gray}"
+                                VerticalTextAlignment="Center" />
+
+                            <controls:ExtendedLabel
+                                FontSize="16"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Maid.Languages, Converter={StaticResource EnumerableCountConverter}, StringFormat='+{0}'}"
+                                TextColor="{StaticResource Primary}"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+
+                        <StackLayout
+                            Grid.Column="2"
+                            Orientation="Horizontal"
+                            Spacing="3">
+                            <fontAwesomeIcon:FontAwesomeIcon
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                Icon="fa-briefcase"
+                                TextColor="{StaticResource Gray}"
+                                VerticalTextAlignment="Center" />
+
+                            <controls:ExtendedLabel
+                                FontSize="16"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Maid.EmploymentHistory, Converter={StaticResource EnumerableCountConverter}, StringFormat='+{0}'}"
+                                TextColor="{StaticResource Primary}"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+
+                        <StackLayout
+                            Grid.Column="4"
+                            Orientation="Horizontal"
+                            Spacing="3">
+                            <fontAwesomeIcon:FontAwesomeIcon
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                Icon="fa-history"
+                                TextColor="{StaticResource Gray}"
+                                VerticalTextAlignment="Center" />
+
+                            <controls:ExtendedLabel
+                                FontSize="16"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Maid.DateOfBirth, Converter={StaticResource YearsFromDateConverter}}"
+                                TextColor="{StaticResource Primary}"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+
+                <BoxView Grid.Row="1" BackgroundColor="{StaticResource Accent}" />
+
+                <Grid Grid.Row="2" Padding="20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="0.5" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <controls:ExtendedLabel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Skills"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls1:Skills
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        ItemsSource="{Binding Maid.Skills}"
+                        VerticalOptions="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Religion"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding Maid.Religion}"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Experience"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding Maid.Languages, Converter={StaticResource EnumerableCountConverter}, StringFormat='{0} years'}"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Nationality"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding Maid.Nationality.Name}"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <Grid
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        ColumnSpacing="0"
+                        RowSpacing="0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:ExtendedLabel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="16"
+                            HorizontalTextAlignment="Start"
+                            Text="Languages"
+                            TextColor="{StaticResource Primary}"
+                            VerticalTextAlignment="Center" />
+
+                        <RelativeLayout
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            <roundedBoxView:RoundedBoxView
+                                BackgroundColor="{StaticResource Blue}"
+                                CornerRadius="11.5"
+                                HeightRequest="23"
+                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                      Property=Width}" />
+
+                            <Grid
+                                HeightRequest="23"
+                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                      Property=Width,
+                                                                                      Constant=-10}"
+                                TranslationX="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <controls:ExtendedLabel
+                                    Grid.Column="0"
+                                    FontSize="12"
+                                    HeightRequest="25"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Spoken"
+                                    TextColor="{StaticResource LightGray}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="80" />
+
+                                <controls:ExtendedLabel
+                                    Grid.Column="1"
+                                    FontSize="12"
+                                    HeightRequest="25"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Read"
+                                    TextColor="{StaticResource LightGray}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="80" />
+
+                                <controls:ExtendedLabel
+                                    Grid.Column="2"
+                                    FontSize="12"
+                                    HeightRequest="25"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Written"
+                                    TextColor="{StaticResource LightGray}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="80" />
+
+                            </Grid>
+                        </RelativeLayout>
+
+                        <controls:ExtendedListView
+                            x:Name="LanguagesListView"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            IsEnabled="False"
+                            ItemsSource="{Binding Maid.Languages}"
+                            RowHeight="40"
+                            SeparatorVisibility="None">
+                            <controls:ExtendedListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <RelativeLayout HorizontalOptions="End">
+                                                <forms:CachedImage
+                                                    Aspect="AspectFit"
+                                                    HeightRequest="36"
+                                                    Source="language_bg.png"
+                                                    WidthRequest="50" />
+                                                <controls:ExtendedLabel
+                                                    FontSize="14"
+                                                    HeightRequest="36"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding Language.ShortName}"
+                                                    TextColor="White"
+                                                    VerticalTextAlignment="Center"
+                                                    WidthRequest="40" />
+                                            </RelativeLayout>
+
+                                            <Grid Grid.Column="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <controls1:LevelImage
+                                                    Grid.Column="0"
+                                                    HeightRequest="33"
+                                                    HorizontalOptions="Center"
+                                                    Level="{Binding SpokenLevel}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="33" />
+
+                                                <controls1:LevelImage
+                                                    Grid.Column="1"
+                                                    HeightRequest="35"
+                                                    HorizontalOptions="Center"
+                                                    Level="{Binding ReadLevel}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="33" />
+
+                                                <controls1:LevelImage
+                                                    Grid.Column="2"
+                                                    HeightRequest="33"
+                                                    HorizontalOptions="Center"
+                                                    Level="{Binding WrittenLevel}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="33" />
+
+                                            </Grid>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </controls:ExtendedListView.ItemTemplate>
+                        </controls:ExtendedListView>
+                    </Grid>
+
+                    <controls:ExtendedLabel
+                        Grid.Row="10"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Marital Status"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="10"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalOptions="StartAndExpand"
+                        HorizontalTextAlignment="Start"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Maid.MaritalStatus}"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="12"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Employment History"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedListView
+                        x:Name="EmploymentHistoryListView"
+                        Grid.Row="12"
+                        Grid.Column="1"
+                        HasUnevenRows="False"
+                        IsEnabled="False"
+                        ItemsSource="{Binding Maid.EmploymentHistory}"
+                        RowHeight="25"
+                        SeparatorVisibility="None">
+                        <controls:ExtendedListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <controls:ExtendedLabel
+                                            Grid.Column="0"
+                                            FontSize="15"
+                                            HorizontalOptions="StartAndExpand"
+                                            HorizontalTextAlignment="Start"
+                                            LineBreakMode="WordWrap"
+                                            Text="{Binding Duration, StringFormat='{0:0.#} years'}"
+                                            TextColor="{StaticResource Gray}"
+                                            VerticalTextAlignment="Center" />
+                                        <controls:ExtendedLabel
+                                            Grid.Column="1"
+                                            FontSize="15"
+                                            HorizontalOptions="Start"
+                                            HorizontalTextAlignment="Start"
+                                            LineBreakMode="WordWrap"
+                                            Text="{Binding Country.Name}"
+                                            TextColor="{StaticResource Gray}"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </controls:ExtendedListView.ItemTemplate>
+                    </controls:ExtendedListView>
+
+                    <controls:ExtendedLabel
+                        Grid.Row="14"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Visa Status"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="14"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalOptions="StartAndExpand"
+                        HorizontalTextAlignment="Start"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Maid.VisaStatus.Name}"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="16"
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="Notes"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Start" />
+
+                    <controls:ExtendedLabel
+                        Grid.Row="16"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalOptions="StartAndExpand"
+                        HorizontalTextAlignment="Start"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Maid.Note}"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <StackLayout
+                        Grid.Row="18"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
+
+                        <controls:ExtendedLabel
+                            FontSize="18"
+                            HorizontalTextAlignment="Start"
+                            Text="Pictures"
+                            TextColor="{StaticResource Primary}"
+                            VerticalTextAlignment="Start" />
+
+                        <RelativeLayout HeightRequest="60">
+                            <controls1:ExtendedListView
+                                AnchorX="0"
+                                AnchorY="0"
+                                HorizontalOptions="Center"
+                                IsPullToRefreshEnabled="False"
+                                ItemsSource="{Binding Pictures}"
+                                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                       Property=Width,
+                                                                                       Factor=1}"
+                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                      Property=Height,
+                                                                                      Factor=1}"
+                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Width,
+                                                                                  Factor=0}"
+                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Height,
+                                                                                  Factor=1}"
+                                Rotation="270"
+                                RowHeight="60"
+                                SelectedItem="{Binding SelectedPicture}"
+                                SeparatorVisibility="None"
+                                VerticalOptions="StartAndExpand">
+                                <controls1:ExtendedListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid
+                                                Padding="1"
+                                                BackgroundColor="{StaticResource DarkWhite}"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Rotation="90"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <forms:CachedImage
+                                                    Aspect="AspectFill"
+                                                    CacheType="All"
+                                                    DownsampleToViewSize="True"
+                                                    HeightRequest="60"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    LoadingPlaceholder="picture"
+                                                    Source="{Binding File}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="60" />
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </controls1:ExtendedListView.ItemTemplate>
+                            </controls1:ExtendedListView>
+                        </RelativeLayout>
+
+                    </StackLayout>
+
+                    <StackLayout
+                        Grid.Row="20"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
+
+                        <controls:ExtendedLabel
+                            FontSize="18"
+                            HorizontalTextAlignment="Start"
+                            Text="Documents"
+                            TextColor="{StaticResource Primary}"
+                            VerticalTextAlignment="Start" />
+
+                        <RelativeLayout HeightRequest="60">
+                            <controls1:ExtendedListView
+                                AnchorX="0"
+                                AnchorY="0"
+                                HorizontalOptions="Center"
+                                IsPullToRefreshEnabled="False"
+                                ItemsSource="{Binding Documents}"
+                                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                       Property=Width,
+                                                                                       Factor=1}"
+                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                      Property=Height,
+                                                                                      Factor=1}"
+                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Width,
+                                                                                  Factor=0}"
+                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Height,
+                                                                                  Factor=1}"
+                                Rotation="270"
+                                RowHeight="60"
+                                SelectedItem="{Binding SelectedDocument}"
+                                SeparatorVisibility="None"
+                                VerticalOptions="StartAndExpand">
+                                <controls1:ExtendedListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid
+                                                Padding="1"
+                                                BackgroundColor="{StaticResource DarkWhite}"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Rotation="90"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <forms:CachedImage
+                                                    Aspect="AspectFit"
+                                                    CacheType="All"
+                                                    DownsampleToViewSize="True"
+                                                    HeightRequest="60"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    LoadingPlaceholder="picture.png"
+                                                    Source="{Binding DocumentType.Icon}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="60" />
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </controls1:ExtendedListView.ItemTemplate>
+                            </controls1:ExtendedListView>
+                        </RelativeLayout>
+
+                    </StackLayout>
+
+                    <BoxView
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="9"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="11"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="13"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                    <BoxView
+                        Grid.Row="15"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+
+                    <BoxView
+                        Grid.Row="17"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+
+                    <BoxView
+                        Grid.Row="19"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Accent}" />
+                </Grid>
+
+                <BoxView Grid.Row="3" BackgroundColor="{StaticResource Accent}" />
+            </Grid>
+        </ScrollView>
+
+        <controls:ExtendedButton
+            Grid.Row="2"
+            BackgroundColor="{StaticResource Primary}"
+            BorderRadius="0"
+            Command="{Binding ApplyFilterCommand}"
+            HeightRequest="50"
+            HorizontalOptions="FillAndExpand"
+            Text="BOOK NOW"
+            TextColor="{StaticResource White}" />
+    </Grid>
+
+</mvvm:BaseView>

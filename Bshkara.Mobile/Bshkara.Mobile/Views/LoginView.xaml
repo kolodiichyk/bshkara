@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="Bshkara.Mobile.Views.LoginView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bashkraEntry="clr-namespace:Bshkara.Mobile.Controls.BashkraEntry;assembly=Bshkara.Mobile"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:controls1="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:state="clr-namespace:Bshkara.Mobile.Controls.State;assembly=Bshkara.Mobile"
+    BackgroundColor="{StaticResource White}">
+
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <state:StateContainer State="{Binding State}">
+
+        <!--  Form view  -->
+        <state:StateCondition Is="Content">
+            <ScrollView>
+                <Grid Padding="40,20,40,30" RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition>
+                            <RowDefinition.Height>
+                                <OnPlatform
+                                    x:TypeArguments="GridLength"
+                                    Android="180"
+                                    iOS="230" />
+                            </RowDefinition.Height>
+                        </RowDefinition>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <forms:CachedImage
+                        Grid.Row="0"
+                        Aspect="AspectFit"
+                        Source="maid.png"
+                        VerticalOptions="Start">
+                        <forms:CachedImage.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="110"
+                                iOS="160" />
+                        </forms:CachedImage.HeightRequest>
+                    </forms:CachedImage>
+
+                    <forms:CachedImage
+                        Grid.Row="0"
+                        Aspect="AspectFit"
+                        Source="bshkara.png"
+                        VerticalOptions="End">
+                        <forms:CachedImage.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="90"
+                                iOS="90" />
+                        </forms:CachedImage.HeightRequest>
+                    </forms:CachedImage>
+
+                    <bashkraEntry:BashkraEntry
+                        Grid.Row="1"
+                        Placeholder="E-mail"
+                        Text="{Binding Email, Mode=TwoWay}" />
+
+                    <bashkraEntry:BashkraEntry
+                        Grid.Row="2"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        Text="{Binding Password, Mode=TwoWay}" />
+
+                    <Grid
+                        Grid.Row="3"
+                        Padding="0,10"
+                        ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <controls1:BshkaraCheckbox
+                            Grid.Column="0"
+                            HorizontalOptions="FillAndExpand"
+                            IsChecked="True"
+                            Text="Remember me"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="CenterAndExpand" />
+
+                        <controls:ExtendedLabel
+                            Grid.Column="1"
+                            HorizontalOptions="EndAndExpand"
+                            HorizontalTextAlignment="End"
+                            LineBreakMode="NoWrap"
+                            Text="Fogot password?"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+
+
+                    <!--  Login button  -->
+                    <controls:ExtendedButton
+                        Grid.Row="4"
+                        BackgroundColor="{StaticResource Primary}"
+                        BorderRadius="20"
+                        Command="{Binding LoginCommand}"
+                        Font="VarelaRound-Regular"
+                        HeightRequest="40"
+                        Text="Login"
+                        TextColor="{StaticResource White}" />
+
+
+                    <ContentView Grid.Row="5" Padding="0,5">
+                        <controls:ExtendedLabel
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="or connect with"
+                            TextColor="{StaticResource Gray}" />
+                    </ContentView>
+
+                    <Grid Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:ImageButton
+                            Grid.Column="0"
+                            BackgroundColor="#41598F"
+                            BorderRadius="20"
+                            Command="{Binding FacebookLoginCommand}"
+                            HeightRequest="40"
+                            ImageHeightRequest="20"
+                            ImageWidthRequest="20"
+                            Orientation="ImageCentered"
+                            Source="facebook.png" />
+
+                        <controls:ImageButton
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource LightBlue}"
+                            BorderRadius="20"
+                            Command="{Binding TwitterLoginCommand}"
+                            HeightRequest="40"
+                            ImageHeightRequest="20"
+                            ImageWidthRequest="20"
+                            Orientation="ImageCentered"
+                            Source="twitter.png" />
+                    </Grid>
+
+                    <controls:ExtendedButton
+                        Grid.Row="7"
+                        BackgroundColor="{StaticResource White}"
+                        BorderColor="{StaticResource Primary}"
+                        BorderRadius="20"
+                        BorderWidth="1"
+                        Command="{Binding SignUpCommand}"
+                        Font="VarelaRound-Regular"
+                        HeightRequest="40"
+                        Text="Sign Up with E-mail"
+                        TextColor="#2355AC"
+                        VerticalOptions="EndAndExpand" />
+
+                </Grid>
+            </ScrollView>
+        </state:StateCondition>
+
+        <!--  Wait view  -->
+        <state:StateCondition Is="Wait">
+            <AbsoluteLayout>
+                <ContentView
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    BackgroundColor="{StaticResource Primary}" />
+                <ActivityIndicator
+                    AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    IsRunning="True"
+                    IsVisible="True"
+                    Color="{StaticResource White}" />
+                <controls:ExtendedLabel
+                    AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Text="Logging in..."
+                    TextColor="{StaticResource White}"
+                    TranslationY="30" />
+            </AbsoluteLayout>
+        </state:StateCondition>
+
+    </state:StateContainer>
+
+
+</ContentPage>

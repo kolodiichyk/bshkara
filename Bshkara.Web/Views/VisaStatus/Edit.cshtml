@@ -1,0 +1,9 @@
+﻿@model Bshkara.Core.Entities.VisaStatusEntity
+@{
+    ViewBag.Title = "Edit visa status";
+}
+
+@using (Html.BeginForm("Edit", "VisaStatus", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

@@ -1,0 +1,8 @@
+﻿/* Panels */
+.hpanel > .panel-heading {
+    border: 1px solid transparent;
+    color: inherit;
+    font-weight: 600;
+    padding: 10px 4px;
+    transition: all .3s;
+}

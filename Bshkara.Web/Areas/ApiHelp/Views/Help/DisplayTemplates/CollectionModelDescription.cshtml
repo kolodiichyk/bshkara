@@ -1,0 +1,6 @@
+@using Bshkara.Web.Areas.ApiHelp.ModelDescriptions
+@model Bshkara.Web.Areas.ApiHelp.ModelDescriptions.CollectionModelDescription
+@if (Model.ElementDescription is ComplexTypeModelDescription)
+{
+    @Html.DisplayFor(m => m.ElementDescription)
+}

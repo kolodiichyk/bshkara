@@ -1,0 +1,52 @@
+﻿@using Bshkara.Core.Entities
+@using Bshkara.Web.ViewModels
+@using PagedList
+@model Bshkara.Core.Entities.AgencyEntity
+
+@{
+    ViewBag.Title = "Edit agency";
+    AgencyUsersViewModel agencyUsersViewModel = ViewBag.AgencyUsersViewModel;
+    AgencyPacksViewModel agencyPackagesViewModel = ViewBag.AgencyPackagesViewModel;
+}
+
+
+@section Styles {
+    @Styles.Render("/Assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css")
+}
+
+<div class="row">
+    <div class="col-md-12 ">
+        @using (Html.BeginForm("Edit", "Agencies", new { ViewBag.ReturnUrl }, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("_CreateOrEdit")
+        }
+    </div>
+</div>
+
+
+@if (User.IsInRole(RoleEntity.AdminRoleName))
+{
+    <div class="row">
+        <div class="col-md-6 ">
+            @using (Html.BeginForm("Edit", "AgencyUsers", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+            {
+                @Html.Partial("~/Views/AgencyUsers/Index.cshtml", agencyUsersViewModel, new ViewDataDictionary())
+            }
+        </div>
+        <div class="col-md-6 ">
+            @using (Html.BeginForm("Edit", "AgencyPacks", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+            {
+                @Html.Partial("~/Views/AgencyPacks/Index.cshtml", agencyPackagesViewModel, new ViewDataDictionary())
+            }
+        </div>
+    </div>
+}
+
+@section Plugins {
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js")
+
+    @Scripts.Render("/Assets/pages/scripts/form-imageupload.js")
+}

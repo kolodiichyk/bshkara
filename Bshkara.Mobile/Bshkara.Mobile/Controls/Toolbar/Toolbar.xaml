@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView
+    x:Class="Bshkara.Mobile.Controls.Toolbar.Toolbar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile">
+    <Grid
+		x:Name="ContentGrid"
+        ColumnSpacing="0"
+        HeightRequest="45"
+        RowSpacing="0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout
+            x:Name="LeftToolBarItemsContainer"
+            Grid.Row="0"
+            Grid.Column="0"
+            Padding="10,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            Orientation="Horizontal"
+            VerticalOptions="Center" />
+
+        <Grid
+            x:Name="CentralToolBarItemsContainer"
+            Grid.Row="0"
+            Grid.Column="1"
+            Padding="0"
+            ColumnSpacing="0"
+            HorizontalOptions="CenterAndExpand"
+            RowSpacing="0"
+            TranslationX="13"
+            VerticalOptions="Center">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnTitleTapped" />
+            </Grid.GestureRecognizers>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="26" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Spacing="1">
+                <controls:ExtendedLabel
+                    x:Name="SubTitleLabel"
+                    FontName="VarelaRound-Regular"
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="False"
+                    TextColor="{StaticResource LightGray}"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="End" />
+
+                <controls:ExtendedLabel
+                    x:Name="TitleLabel"
+                    FontName="VarelaRound-Regular"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="False"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Start"
+                    VerticalTextAlignment="Start" />
+            </StackLayout>
+
+            <fontAwesomeIcon:FontAwesomeIcon
+                x:Name="DropDownIcon"
+                Grid.Column="1"
+                FontSize="22"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Icon="fa-angle-down"
+                IsVisible="False"
+                TextColor="{StaticResource LightGray}"
+                TranslationY="-4"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <StackLayout
+            x:Name="RightToolBarItemsContainer"
+            Grid.Row="0"
+            Grid.Column="2"
+            Padding="0,0,10,0"
+            HorizontalOptions="EndAndExpand"
+            Orientation="Horizontal"
+            VerticalOptions="Center" />
+
+        <BoxView
+            x:Name="BottomLine"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            HeightRequest="2"
+            IsVisible="False" />
+    </Grid>
+</ContentView>

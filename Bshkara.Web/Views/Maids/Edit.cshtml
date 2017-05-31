@@ -1,0 +1,93 @@
+﻿@using Bshkara.Core.Entities
+@using Bshkara.Web.ViewModels
+@using PagedList
+@model Bshkara.Core.Entities.MaidEntity
+
+@{
+    ViewBag.Title = "Edit maid";
+    MaidEmploymentHistoriesViewModel employmentHistoriesViewModel = ViewBag.MaidEmploymentHistoriesViewModel;
+    MaidLanguagesViewModel languagesViewModel = ViewBag.MaidLanguagesViewModel;
+    MaidSkillsViewModel skillsViewModel = ViewBag.MaidSkillsViewModel;
+    MaidDocumentsViewModel documentsViewModel = ViewBag.MaidDocumentsViewModel;
+}
+
+@section Styles {
+    @Styles.Render("/Assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css")
+}
+
+<div class="row">
+    <div class="col-md-12 ">
+        @using (Html.BeginForm("Edit", "Maids", FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("_CreateOrEdit")
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 ">
+        @using (Html.BeginForm("Edit", "Passports", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("~/Views/Passports/_CreateOrEdit.cshtml", Model.Passport, new ViewDataDictionary())
+        }
+    </div>
+    <div class="col-md-6 ">
+        @using (Html.BeginForm("Index", "MaidEmploymentHistories", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("~/Views/MaidEmploymentHistories/Index.cshtml", employmentHistoriesViewModel, new ViewDataDictionary())
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 ">
+        @using (Html.BeginForm("Index", "MaidLanguages", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("~/Views/MaidLanguages/Index.cshtml", languagesViewModel, new ViewDataDictionary())
+        }
+    </div>
+    <div class="col-md-6 ">
+        @using (Html.BeginForm("Index", "MaidSkills", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("~/Views/MaidSkills/Index.cshtml", skillsViewModel, new ViewDataDictionary())
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 ">
+        @using (Html.BeginForm("Index", "MaidDocuments", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal"}))
+        {
+            @Html.Partial("~/Views/MaidDocuments/Index.cshtml", documentsViewModel, new ViewDataDictionary())
+        }
+    </div>
+</div>
+
+@section Plugins {
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js")
+    @Scripts.Render("/Assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js")
+
+    @Scripts.Render("/Assets/pages/scripts/form-imageupload.js")
+}
+
+@section Scripts {
+    @Scripts.Render("/Assets/pages/scripts/table-datatables-managed.min.js")
+
+    <script type="text/javascript">
+            // ajax delete
+        function deleteItem(id, controllerName) {
+            if (window.confirm("Are you sure?")) {
+                    $.get("/" + controllerName + "/Delete/" + id, function (data) {
+                        if (data.Success) {
+                            $('#formIndex').submit();
+                            location.href = "@ViewBag.ReturnUrl";
+                        }
+                        else {
+                            toastr["error"](data.Error, 'Error');
+                        }
+                    });
+                }
+            }
+    </script>
+}
+

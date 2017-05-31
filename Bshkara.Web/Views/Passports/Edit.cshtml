@@ -1,0 +1,9 @@
+﻿@model Bshkara.Core.Entities.MaidPassportDetailEntity
+@{
+    ViewBag.Title = "Edit passport data";
+}
+
+@using (Html.BeginForm("Edit", "Passports", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

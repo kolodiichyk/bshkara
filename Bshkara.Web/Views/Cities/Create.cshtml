@@ -1,0 +1,12 @@
+﻿@model Bshkara.Core.Entities.CityEntity
+
+
+@{
+    ViewBag.Title = "Add city";
+}
+
+
+@using (Html.BeginForm("Create", "Cities", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

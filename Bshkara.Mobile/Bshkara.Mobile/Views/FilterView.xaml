@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.FilterView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:controls1="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:forms1="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    xmlns:toolbar="clr-namespace:Bshkara.Mobile.Controls.Toolbar;assembly=Bshkara.Mobile"
+    xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    BackgroundColor="{StaticResource White}">
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <toolbar:Toolbar
+            Title="Filters"
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}">
+            <toolbar:Toolbar.LeftToolbarItems>
+                <controls:ExtendedLabel
+                    FontSize="14"
+                    Text="Cancel"
+                    TextColor="{StaticResource Gray}">
+                    <controls:ExtendedLabel.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </controls:ExtendedLabel.GestureRecognizers>
+                </controls:ExtendedLabel>
+            </toolbar:Toolbar.LeftToolbarItems>
+
+            <toolbar:Toolbar.RightToolbarItems>
+                <controls:ExtendedLabel
+                    FontSize="14"
+                    Text="Reset"
+                    TextColor="{StaticResource Gray}">
+                    <controls:ExtendedLabel.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ResetCommand}" />
+                    </controls:ExtendedLabel.GestureRecognizers>
+                </controls:ExtendedLabel>
+            </toolbar:Toolbar.RightToolbarItems>
+        </toolbar:Toolbar>
+
+        <ScrollView
+            Grid.Row="1"
+            Padding="5,10,5,0"
+            Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="95" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackLayout
+                    Grid.Row="0"
+                    Padding="10,15,10,0"
+                    BackgroundColor="{StaticResource DarkWhite}"
+                    Spacing="0">
+
+                    <controls:ExtendedLabel
+                        FontSize="14"
+                        Text="Monthly Salary"
+                        TextColor="{StaticResource Primary}" />
+                    <controls:ExtendedLabel
+                        FontSize="10"
+                        Text="Select a Monthly Salary range"
+                        TextColor="{StaticResource Gray}" />
+                    <Grid Padding="0,5,0,0">
+                        <Grid.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="25"
+                                iOS="35" />
+                        </Grid.HeightRequest>
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HorizontalOptions="StartAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Source={x:Reference SalarySlider}, Path=LowerValue, StringFormat='{0} AED'}"
+                            TextColor="{StaticResource DarkGray}" />
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            HorizontalTextAlignment="End"
+                            Text="{Binding Source={x:Reference SalarySlider}, Path=UpperValue, StringFormat='{0} AED'}"
+                            TextColor="{StaticResource DarkGray}" />
+                    </Grid>
+                    <controls1:BshkaraRangeSlider
+                        x:Name="SalarySlider"
+                        BarHeight="15"
+                        LowerValue="{Binding MinSalary, Mode=TwoWay}"
+                        MaximumValue="{Binding MaxSalaryValue}"
+                        MinimumValue="{Binding MinSalaryValue}"
+                        ShowTextAboveThumbs="False"
+                        StepValue="10"
+                        TranslationY="-10"
+                        UpperValue="{Binding MaxSalary, Mode=TwoWay}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="10,10,10,0"
+                    Spacing="0">
+                    <controls:ExtendedLabel
+                        FontSize="14"
+                        Text="Experience"
+                        TextColor="{StaticResource Primary}" />
+                    <controls:ExtendedLabel
+                        FontSize="10"
+                        Text="Years of experience"
+                        TextColor="{StaticResource Gray}" />
+                    <Grid Padding="0,5,0,0">
+                        <Grid.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="25"
+                                iOS="35" />
+                        </Grid.HeightRequest>
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HorizontalOptions="StartAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Source={x:Reference ExperienceSlider}, Path=LowerValue, StringFormat='{0} Years'}"
+                            TextColor="{StaticResource DarkGray}" />
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            HorizontalTextAlignment="End"
+                            Text="{Binding Source={x:Reference ExperienceSlider}, Path=UpperValue, StringFormat='{0} Years'}"
+                            TextColor="{StaticResource DarkGray}" />
+                    </Grid>
+                    <controls1:BshkaraRangeSlider
+                        x:Name="ExperienceSlider"
+                        BarHeight="15"
+                        LowerValue="{Binding MinExperience, Mode=TwoWay}"
+                        MaximumValue="{Binding MaxExperienceValue}"
+                        MinimumValue="{Binding MinExperienceValue}"
+                        ShowTextAboveThumbs="False"
+                        StepValue="1"
+                        TranslationY="-5"
+                        UpperValue="{Binding MaxExperience, Mode=TwoWay}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="2"
+                    Padding="10,10,10,10"
+                    BackgroundColor="{StaticResource DarkWhite}"
+                    Spacing="0">
+                    <controls:ExtendedLabel
+                        FontSize="14"
+                        Text="Age Range"
+                        TextColor="{StaticResource Primary}" />
+                    <Grid Padding="0,5,0,0">
+                        <Grid.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="25"
+                                iOS="35" />
+                        </Grid.HeightRequest>
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HorizontalOptions="StartAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Source={x:Reference AgeSlider}, Path=LowerValue, StringFormat='{0} Years'}"
+                            TextColor="{StaticResource DarkGray}" />
+
+                        <controls:ExtendedLabel
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            HorizontalTextAlignment="End"
+                            Text="{Binding Source={x:Reference AgeSlider}, Path=UpperValue, StringFormat='{0} Years'}"
+                            TextColor="{StaticResource DarkGray}" />
+                    </Grid>
+                    <controls1:BshkaraRangeSlider
+                        x:Name="AgeSlider"
+                        BarHeight="15"
+                        LowerValue="{Binding MinAgeRange, Mode=TwoWay}"
+                        MaximumValue="{Binding MaxAgeRangeValue}"
+                        MinimumValue="{Binding MinAgeRangeValue}"
+                        ShowTextAboveThumbs="False"
+                        StepValue="1"
+                        UpperValue="{Binding MaxAgeRange, Mode=TwoWay}"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <Grid Grid.Row="3" Padding="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <controls:ImageButton
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource White}"
+                        BorderColor="{StaticResource DarkGray}"
+                        BorderWidth="0.5"
+                        Command="{Binding SelectNationalityCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        ImageHeightRequest="20"
+                        ImageWidthRequest="20"
+                        Orientation="ImageToRight"
+                        Source="drop_down.png"
+                        TextColor="{StaticResource Black}">
+                        <controls:ImageButton.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Nationality, Converter={StaticResource NullToBoolConverter}}"
+                                TargetType="controls:ImageButton"
+                                Value="false">
+                                <Setter Property="Text" Value="All nationalities" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding Nationality, Converter={StaticResource NullToBoolConverter}}"
+                                TargetType="controls:ImageButton"
+                                Value="true">
+                                <Setter Property="Text" Value="{Binding Nationality.Name}" />
+                            </DataTrigger>
+                        </controls:ImageButton.Triggers>
+                    </controls:ImageButton>
+
+                    <controls:ImageButton
+                        Grid.Column="1"
+                        BackgroundColor="{StaticResource White}"
+                        BorderColor="{StaticResource DarkGray}"
+                        BorderWidth="0.5"
+                        Command="{Binding SelectCityCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        ImageHeightRequest="20"
+                        ImageWidthRequest="20"
+                        Orientation="ImageToRight"
+                        Source="drop_down.png"
+                        TextColor="{StaticResource Black}">
+                        <controls:ImageButton.Triggers>
+                            <DataTrigger
+                                Binding="{Binding City, Converter={StaticResource NullToBoolConverter}}"
+                                TargetType="controls:ImageButton"
+                                Value="false">
+                                <Setter Property="Text" Value="All cities" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding City, Converter={StaticResource NullToBoolConverter}}"
+                                TargetType="controls:ImageButton"
+                                Value="true">
+                                <Setter Property="Text" Value="{Binding City.Name}" />
+                            </DataTrigger>
+                        </controls:ImageButton.Triggers>
+                    </controls:ImageButton>
+                </Grid>
+
+                <StackLayout
+                    Grid.Row="4"
+                    Padding="10,15,10,10"
+                    BackgroundColor="{StaticResource DarkWhite}"
+                    Spacing="0">
+                    <controls:ExtendedLabel
+                        FontSize="14"
+                        Text="Skills"
+                        TextColor="{StaticResource Primary}" />
+
+                    <RelativeLayout HeightRequest="40">
+                        <controls1:ExtendedListView
+                            AnchorX="0"
+                            AnchorY="0"
+                            BackgroundColor="Transparent"
+                            HasUnevenRows="True"
+                            HorizontalOptions="Center"
+                            IsPullToRefreshEnabled="False"
+                            ItemsSource="{Binding Skills}"
+                            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                   Property=Width,
+                                                                                   Factor=1}"
+                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Height,
+                                                                                  Factor=1}"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                              Property=Width,
+                                                                              Factor=0}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                              Property=Height,
+                                                                              Factor=1}"
+                            Rotation="270"
+                            RowHeight="40"
+                            SelectedItem="{Binding SelectedSkill}"
+                            SeparatorVisibility="None"
+                            VerticalOptions="StartAndExpand">
+                            <controls1:ExtendedListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid
+                                            Padding="5"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Rotation="90"
+                                            VerticalOptions="CenterAndExpand">
+
+                                            <forms:CachedImage
+                                                Aspect="AspectFit"
+                                                CacheType="All"
+                                                DownsampleToViewSize="True"
+                                                HeightRequest="30"
+                                                HorizontalOptions="CenterAndExpand"
+                                                IsVisible="{Binding IsSelected, Converter={StaticResource InvertBoolConverter}}"
+                                                Opacity="0.35"
+                                                Source="{Binding Item, Converter={StaticResource SkillUnactivedImageConverter}}"
+                                                VerticalOptions="CenterAndExpand"
+                                                WidthRequest="30" />
+
+                                            <forms:CachedImage
+                                                Aspect="AspectFit"
+                                                CacheType="All"
+                                                DownsampleToViewSize="True"
+                                                HeightRequest="30"
+                                                HorizontalOptions="CenterAndExpand"
+                                                IsVisible="{Binding IsSelected}"
+                                                Source="{Binding Item.Icon}"
+                                                VerticalOptions="CenterAndExpand"
+                                                WidthRequest="30" />
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </controls1:ExtendedListView.ItemTemplate>
+                        </controls1:ExtendedListView>
+                    </RelativeLayout>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="5"
+                    Padding="10,15,10,10"
+                    Spacing="0">
+                    <controls:ExtendedLabel
+                        FontSize="14"
+                        Text="Langueges"
+                        TextColor="{StaticResource Primary}" />
+                    <controls1:Langueges ItemsSource="{Binding SelectedLanguages}" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="6"
+                    Padding="10,10,10,10"
+                    HorizontalOptions="StartAndExpand"
+                    Spacing="5">
+                    <controls1:BshkaraCheckbox
+                        IsChecked="{Binding ShowOnlyWithPhoto}"
+                        Text="Show Maids with Photos only"
+                        TextColor="{StaticResource DarkGray}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+
+        <controls:ExtendedButton
+            Grid.Row="2"
+            BackgroundColor="{StaticResource Primary}"
+            BorderRadius="0"
+            Command="{Binding ApplyFilterCommand}"
+            HeightRequest="50"
+            HorizontalOptions="FillAndExpand"
+            Text="Save Filter"
+            TextColor="{StaticResource White}" />
+
+
+    </Grid>
+</mvvm:BaseView>

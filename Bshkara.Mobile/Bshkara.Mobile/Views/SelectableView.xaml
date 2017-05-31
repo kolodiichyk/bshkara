@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.SelectableView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+    xmlns:controls1="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    xmlns:roundedBoxView="clr-namespace:Bshkara.Mobile.Controls.RoundedBoxView;assembly=Bshkara.Mobile"
+    xmlns:state="clr-namespace:Bshkara.Mobile.Controls.State;assembly=Bshkara.Mobile"
+    xmlns:toolbar="clr-namespace:Bshkara.Mobile.Controls.Toolbar;assembly=Bshkara.Mobile"
+    BackgroundColor="{StaticResource White}">
+
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Top toolbar  -->
+        <toolbar:Toolbar
+            Title="{Binding Title}"
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            SubTitle="{Binding SubTitle}">
+            <toolbar:Toolbar.LeftToolbarItems>
+                <controls1:ExtendedLabel
+                    FontSize="14"
+                    Text="Cancel"
+                    TextColor="{StaticResource Gray}">
+                    <controls1:ExtendedLabel.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </controls1:ExtendedLabel.GestureRecognizers>
+                </controls1:ExtendedLabel>
+            </toolbar:Toolbar.LeftToolbarItems>
+            <toolbar:Toolbar.RightToolbarItems>
+                <controls1:ExtendedLabel
+                    FontSize="14"
+                    IsVisible="{Binding HideAnyButton, Converter={StaticResource InvertBoolConverter}}"
+                    Text="Any"
+                    TextColor="{StaticResource Gray}">
+                    <controls1:ExtendedLabel.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ResetCommand}" />
+                    </controls1:ExtendedLabel.GestureRecognizers>
+                </controls1:ExtendedLabel>
+            </toolbar:Toolbar.RightToolbarItems>
+        </toolbar:Toolbar>
+
+        <state:StateContainer Grid.Row="1" State="{Binding State}">
+
+            <!--  Form view  -->
+            <state:StateCondition Is="Content">
+                <state:StateCondition.Appearing>
+                    <state:FadeInAnimation />
+                </state:StateCondition.Appearing>
+                <state:StateCondition.Disappearing>
+                    <state:FadeOutAnimation />
+                </state:StateCondition.Disappearing>
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Search box  -->
+                    <RelativeLayout
+                        Grid.Row="0"
+                        Padding="10,5,10,0"
+                        HeightRequest="55">
+                        <roundedBoxView:RoundedBoxView
+                            BorderColor="{StaticResource LightGray}"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            HeightRequest="40"
+                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Width,
+                                                                                  Constant=-20}"
+                            TranslationX="10"
+                            TranslationY="10" />
+                        <StackLayout
+                            Padding="10,0"
+                            Orientation="Horizontal"
+                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                  Property=Width,
+                                                                                  Constant=-30}"
+                            TranslationX="10">
+                            <StackLayout.TranslationY>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="15"
+                                    iOS="10" />
+                            </StackLayout.TranslationY>
+
+
+                            <forms:CachedImage
+                                HeightRequest="20"
+                                Source="search_gray.png"
+                                WidthRequest="20" />
+                            <controls1:ExtendedEntry
+                                HasBorder="false"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Search..."
+                                PlaceholderTextColor="{StaticResource LightGray}"
+                                Text="{Binding Search}"
+                                TextColor="{StaticResource DarkGray}" />
+                        </StackLayout>
+                    </RelativeLayout>
+
+                    <!--  Items to select  -->
+                    <controls:ExtendedListView
+                        Grid.Row="1"
+                        Footer="{Binding .}"
+                        ItemsSource="{Binding Items}"
+                        LoadMoreCommand="{Binding LoadMoreCommand}"
+                        OddRowColor="#FCF3FE"
+                        SelectedItem="{Binding SelectedItem}"
+                        SeparatorVisibility="None">
+                        <controls:ExtendedListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10,5">
+                                        <controls1:ExtendedLabel
+                                            Grid.Row="0"
+                                            FontAttributes="Bold"
+                                            FontSize="16"
+                                            HorizontalTextAlignment="Start"
+                                            Text="{Binding Name}"
+                                            TextColor="{StaticResource PrimaryDark}"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </controls:ExtendedListView.ItemTemplate>
+
+                        <!--  Wait window  -->
+                        <ListView.FooterTemplate>
+                            <DataTemplate>
+                                <AbsoluteLayout HeightRequest="25" WidthRequest="25">
+                                    <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+                                    <ActivityIndicator
+                                        AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                                        IsRunning="{Binding IsBusy}"
+                                        IsVisible="{Binding IsBusy}"
+                                        Color="{StaticResource Primary}" />
+                                </AbsoluteLayout>
+                            </DataTemplate>
+                        </ListView.FooterTemplate>
+                    </controls:ExtendedListView>
+
+
+                </Grid>
+            </state:StateCondition>
+
+            <!--  Wait view  -->
+            <state:StateCondition Is="Wait">
+                <state:StateCondition.Appearing>
+                    <state:FadeInAnimation />
+                </state:StateCondition.Appearing>
+                <state:StateCondition.Disappearing>
+                    <state:FadeOutAnimation />
+                </state:StateCondition.Disappearing>
+                <AbsoluteLayout>
+                    <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+                    <ActivityIndicator
+                        AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        IsRunning="True"
+                        IsVisible="True"
+                        Color="{StaticResource Primary}" />
+                    <controls1:ExtendedLabel
+                        AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        Text="Getting data..."
+                        TextColor="{StaticResource Primary}"
+                        TranslationY="30" />
+                </AbsoluteLayout>
+            </state:StateCondition>
+        </state:StateContainer>
+    </Grid>
+</mvvm:BaseView>

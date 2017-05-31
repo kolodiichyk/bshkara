@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Agencies_Title" xml:space="preserve">
+    <value>Agencies</value>
+  </data>
+  <data name="Api_Auth_CantCreateUser" xml:space="preserve">
+    <value>Can't create user</value>
+  </data>
+  <data name="Api_Auth_ConfirmatedPasswordEmpty" xml:space="preserve">
+    <value>Confirmated password is empty</value>
+  </data>
+  <data name="Api_Auth_EmailIsEmpty" xml:space="preserve">
+    <value>Email is empty.</value>
+  </data>
+  <data name="Api_Auth_EmailIsNotValid" xml:space="preserve">
+    <value>Email is not valid.</value>
+  </data>
+  <data name="Api_Auth_EmailMustBeConfirmed" xml:space="preserve">
+    <value>You must have a confirmed email to sing in.</value>
+  </data>
+  <data name="Api_Auth_InvalidLogin" xml:space="preserve">
+    <value>Invalid login</value>
+  </data>
+  <data name="Api_Auth_Lockout" xml:space="preserve">
+    <value>LockedOut</value>
+  </data>
+  <data name="Api_Auth_PasswordIsEmpty" xml:space="preserve">
+    <value>Password is empty.</value>
+  </data>
+  <data name="Api_Auth_PasswordNotEqualsConfirmatedPassword" xml:space="preserve">
+    <value>Password and confirmated password are not equals </value>
+  </data>
+  <data name="Api_Auth_UserNotExists" xml:space="preserve">
+    <value>User with this credentials not exists.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Booking_AlreadyBooked" xml:space="preserve">
+    <value>This maid is already booked by you</value>
+  </data>
+  <data name="Booking_CantDeleteBooking" xml:space="preserve">
+    <value>Can't delete booking</value>
+  </data>
+  <data name="Booking_IsInProcessing" xml:space="preserve">
+    <value>This booking is in processing</value>
+  </data>
+  <data name="Booking_NotEnoughData" xml:space="preserve">
+    <value>Not enough data to book/unbook this maid</value>
+  </data>
+  <data name="Booking_NotExists" xml:space="preserve">
+    <value>This booking is not exists</value>
+  </data>
+  <data name="Booking_Title" xml:space="preserve">
+    <value>Booking</value>
+  </data>
+  <data name="Booking_UnCantBookMaid" xml:space="preserve">
+    <value>Can't unbook this maid</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>2016 © Agilies software development &amp; design</value>
+  </data>
+  <data name="Countries_CantDeleteExistsInAgencies" xml:space="preserve">
+    <value>Can't delete country, becourese it exists in agencies</value>
+  </data>
+  <data name="Countries_CantDeleteExistsInMaidEmploymentHistory" xml:space="preserve">
+    <value>Can't delete country, becourese it exists in maid employment history</value>
+  </data>
+  <data name="Countries_Title" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="Languages_CantDeleteExistsInMaidLanguages" xml:space="preserve">
+    <value>Can't delete country, becourese it exists in maids langueges</value>
+  </data>
+  <data name="Languages_Title" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="Login_AgencyName" xml:space="preserve">
+    <value>Agency name</value>
+  </data>
+  <data name="Login_ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="Login_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Login_EnterEmailToReset" xml:space="preserve">
+    <value>Enter your e-mail address below to reset your password.</value>
+  </data>
+  <data name="Login_ForgetPassword" xml:space="preserve">
+    <value>Forget Password?</value>
+  </data>
+  <data name="Login_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_OrLoginWith" xml:space="preserve">
+    <value>Or login with</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login_Register" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Login_Remember" xml:space="preserve">
+    <value>Remember</value>
+  </data>
+  <data name="Login_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="MaidDocuments_Title" xml:space="preserve">
+    <value>Maid documents</value>
+  </data>
+  <data name="MaidEmploymentHistories_Title" xml:space="preserve">
+    <value>Maids employment histories</value>
+  </data>
+  <data name="MaidLanguages_Title" xml:space="preserve">
+    <value>Maid languages</value>
+  </data>
+  <data name="MaidSkills_Title" xml:space="preserve">
+    <value>Maid skills</value>
+  </data>
+  <data name="Maids_CantDeleteExistsInBooking" xml:space="preserve">
+    <value>Can't delete maid, becourese it exists in booking</value>
+  </data>
+  <data name="Maid_Title" xml:space="preserve">
+    <value>Maids</value>
+  </data>
+  <data name="Nationalities_Title" xml:space="preserve">
+    <value>Nationalities</value>
+  </data>
+  <data name="Packages_CantDeleteExistsInAgencyPackage" xml:space="preserve">
+    <value>Can't delete package, becourese it exists in agency</value>
+  </data>
+  <data name="Register_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Skills_Title" xml:space="preserve">
+    <value>Skills</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Warning_DataWasChenged" xml:space="preserve">
+    <value>During the editing of data have been changed by someone else and no longer relevant. Refresh the page and try again.</value>
+  </data>
+  <data name="Warning_UnableToSave" xml:space="preserve">
+    <value>Unable to save changes. Try again, and if the problem persists, see your system administrator.</value>
+  </data>
+  <data name="Cities_CantDeleteExistsInMaid" xml:space="preserve">
+    <value>Can't delete city</value>
+  </data>
+  <data name="Cities_Title" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="DocumentTypes_CantDeleteExistsInMaidDocuments" xml:space="preserve">
+    <value>Can't delete document type, becourese it exists in maids documents</value>
+  </data>
+  <data name="DocumentTypes_Title" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+</root>

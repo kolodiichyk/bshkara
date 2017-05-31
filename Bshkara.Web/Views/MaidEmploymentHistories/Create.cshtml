@@ -1,0 +1,10 @@
+﻿@model Bshkara.Core.Entities.MaidEmploymentHistoryEntity
+
+@{
+    ViewBag.Title = "Add maid employment history";
+}
+
+@using (Html.BeginForm("Create", "MaidEmploymentHistories", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

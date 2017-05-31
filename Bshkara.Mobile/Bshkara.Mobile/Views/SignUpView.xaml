@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="Bshkara.Mobile.Views.SignUpView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bashkraEntry="clr-namespace:Bshkara.Mobile.Controls.BashkraEntry;assembly=Bshkara.Mobile"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile"
+    BackgroundColor="{StaticResource White}">
+
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <Grid Padding="0,10,0,0" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180" />
+                <RowDefinition Height="30" />
+
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <forms:CachedImage
+                Grid.Row="0"
+                Aspect="AspectFit"
+                Source="maid.png" />
+
+            <fontAwesomeIcon:FontAwesomeIcon  Grid.Row="0" Icon="fa-times"  FontSize="30" HorizontalOptions="End" VerticalOptions="Start"
+                                             TextColor="{StaticResource LightGray}" TranslationX="-20" >
+                <fontAwesomeIcon:FontAwesomeIcon.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                </fontAwesomeIcon:FontAwesomeIcon.GestureRecognizers>
+            </fontAwesomeIcon:FontAwesomeIcon>
+
+            <controls:ExtendedLabel
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Agent/User Sign Up"
+                TextColor="{StaticResource Blue}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+
+            <StackLayout
+                Grid.Row="2"
+                Padding="50,0,50,10"
+                Spacing="12">
+                <bashkraEntry:BashkraEntry Placeholder="Username" Text="{Binding Username}" />
+
+                <bashkraEntry:BashkraEntry Placeholder="E-mail" Text="{Binding Email}" />
+
+                <bashkraEntry:BashkraEntry Placeholder="Phone" Text="{Binding Phone}" />
+
+                <bashkraEntry:BashkraEntry
+                    IsPassword="True"
+                    Placeholder="Password"
+                    Text="{Binding Password}" />
+
+                <bashkraEntry:BashkraEntry
+                    IsPassword="True"
+                    Placeholder="Confirm password"
+                    Text="{Binding ConfirmPassword}" />
+
+                <controls:ExtendedButton
+                    BackgroundColor="{StaticResource Primary}"
+                    BorderRadius="20"
+                    Font="VarelaRound-Regular"
+                    HeightRequest="40"
+                    Text="Register"
+                    TextColor="{StaticResource White}" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="3"
+                Padding="10,20,10,10"
+                BackgroundColor="{StaticResource Primary}"
+                HeightRequest="30"
+                Spacing="0"
+                VerticalOptions="CenterAndExpand">
+                <controls:ExtendedLabel
+                    FontSize="11"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="By clicking «Registration» you agree to our"
+                    TextColor="{StaticResource LightGray}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+                <controls:ExtendedLabel
+                    FontSize="11"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Terms of Service."
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

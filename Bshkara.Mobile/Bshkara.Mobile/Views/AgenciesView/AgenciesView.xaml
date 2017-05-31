@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.AgenciesView.AgenciesView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:agenciesView="clr-namespace:Bshkara.Mobile.Views.AgenciesView;assembly=Bshkara.Mobile"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:behaviors1="clr-namespace:XLabs.Forms.Behaviors;assembly=XLabs.Forms"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:homeView="clr-namespace:Bshkara.Mobile.Views.HomeView;assembly=Bshkara.Mobile"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    xmlns:resources="clr-namespace:Bshkara.Mobile.Localization.Resources;assembly=Bshkara.Mobile"
+    xmlns:state="clr-namespace:Bshkara.Mobile.Controls.State;assembly=Bshkara.Mobile"
+    xmlns:toolbar="clr-namespace:Bshkara.Mobile.Controls.Toolbar;assembly=Bshkara.Mobile"
+    BackgroundColor="{StaticResource White}">
+
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+
+        <toolbar:Toolbar
+            Title="{Binding City.CityWithCountry}"
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            ShowDropDownIcon="True"
+            SubTitle="Your Location"
+            TitleTapCommand="{Binding ChangeCityCommand}">
+            <toolbar:Toolbar.LeftToolbarItems>
+                <fontAwesomeIcon:FontAwesomeIcon
+                    FontSize="18"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
+                    Icon="fa-bars"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="40">
+                    <fontAwesomeIcon:FontAwesomeIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                    </fontAwesomeIcon:FontAwesomeIcon.GestureRecognizers>
+                </fontAwesomeIcon:FontAwesomeIcon>
+            </toolbar:Toolbar.LeftToolbarItems>
+        </toolbar:Toolbar>
+
+        <toolbar:Toolbar
+            Grid.Row="1"
+            BackgroundColor="#F5F5F5"
+            BottomLineColor="#E3E3E3"
+            BottomLineHeight="5"
+            HeightRequest="35"
+            SetIOSTopPadding="false"
+            ShowBottomLine="True">
+            <toolbar:Toolbar.LeftToolbarItems>
+                <fontAwesomeIcon:FontAwesomeIcon
+                    Command="{Binding ShowFilterCommand}"
+                    FontSize="18"
+                    HeightRequest="30"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Icon="fa-filter"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="30" />
+            </toolbar:Toolbar.LeftToolbarItems>
+        </toolbar:Toolbar>
+
+        <ContentView Grid.Row="2" Padding="0">
+
+            <!--  For statecontainer info please see http://blog.xdelivered.com/binding-state-mvvm-xamarin-forms  -->
+            <state:StateContainer State="{Binding State}">
+
+                <!--  list view  -->
+                <state:StateCondition Is="List">
+                    <state:StateCondition.Appearing>
+                        <state:FadeInAnimation />
+                    </state:StateCondition.Appearing>
+                    <agenciesView:AgenciesListView BindingContext="{Binding .}" />
+                </state:StateCondition>
+
+                <!--  grid view
+                <state:StateCondition Is="Grid">
+                    <state:StateCondition.Appearing>
+                        <state:FadeInAnimation />
+                    </state:StateCondition.Appearing>
+                    <homeView:MaidsGridView BindingContext="{Binding .}" />
+                </state:StateCondition>-->
+
+                <!--  Wait view  -->
+                <state:StateCondition Is="Wait">
+                    <state:StateCondition.Appearing>
+                        <state:FadeInAnimation />
+                    </state:StateCondition.Appearing>
+                    <AbsoluteLayout>
+                        <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+                        <ActivityIndicator
+                            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                            IsRunning="True"
+                            IsVisible="True"
+                            Color="{StaticResource Primary}" />
+                        <controls:ExtendedLabel
+                            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                            Text="Getting data..."
+                            TextColor="{StaticResource Primary}"
+                            TranslationY="30" />
+                    </AbsoluteLayout>
+                </state:StateCondition>
+
+                <!--  No records were found that match the specified search criteria  -->
+                <state:StateCondition Is="NoRecords">
+                    <state:StateCondition.Appearing>
+                        <state:FadeInAnimation />
+                    </state:StateCondition.Appearing>
+                    <AbsoluteLayout Padding="50">
+                        <StackLayout
+                            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                            Spacing="20"
+                            VerticalOptions="Center">
+                            <controls:ExtendedLabel
+                                HorizontalTextAlignment="Center"
+                                LineBreakMode="WordWrap"
+                                Text="No records were found that match the specified search criteria"
+                                TextColor="{StaticResource Primary}"
+                                VerticalTextAlignment="Center" />
+
+                            <controls:ExtendedButton
+                                BackgroundColor="{StaticResource Primary}"
+                                BorderRadius="20"
+                                Command="{Binding RefreshCommand}"
+                                HeightRequest="40"
+                                Text="Refresh"
+                                TextColor="{StaticResource White}"
+                                WidthRequest="100" />
+                        </StackLayout>
+                    </AbsoluteLayout>
+                </state:StateCondition>
+
+            </state:StateContainer>
+        </ContentView>
+
+        <ContentView Grid.Row="3">
+            <RelativeLayout>
+                <forms:CachedImage
+                    Aspect="Fill"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                           Property=Height,
+                                                                           Factor=1,
+                                                                           Constant=-10}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width,
+                                                                          Factor=1,
+                                                                          Constant=0}"
+                    Source="pinkbottombg.png"
+                    TranslationY="10" />
+
+                <toolbar:Toolbar RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=10}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}">
+
+
+                    <toolbar:Toolbar.TranslationY>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="-5"
+                            iOS="5" />
+                    </toolbar:Toolbar.TranslationY>
+
+
+                    <toolbar:Toolbar.RightToolbarItems>
+                        <controls:ImageButton
+                            BackgroundColor="{StaticResource Accent}"
+                            BorderRadius="25"
+                            Command="{Binding SingleTapCommand}"
+                            HeightRequest="50"
+                            ImageHeightRequest="28"
+                            ImageWidthRequest="28"
+                            Orientation="ImageCentered"
+                            Source="user.png"
+                            WidthRequest="50" />
+                    </toolbar:Toolbar.RightToolbarItems>
+                    <toolbar:Toolbar.LeftToolbarItems>
+                        <controls:ImageButton
+                            BackgroundColor="{StaticResource Accent}"
+                            BorderRadius="25"
+                            Command="{Binding LongPressCommand}"
+                            HeightRequest="50"
+                            ImageHeightRequest="28"
+                            ImageWidthRequest="28"
+                            Orientation="ImageCentered"
+                            Source="search.png"
+                            WidthRequest="50" />
+                    </toolbar:Toolbar.LeftToolbarItems>
+                </toolbar:Toolbar>
+
+                <controls:GesturesContentView
+                    HeightRequest="90"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=0.5,
+                                                                      Constant=-45}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Height,
+                                                                      Factor=0.5,
+                                                                      Constant=-55}"
+                    WidthRequest="90">
+                    <forms:CachedImage
+                        Aspect="AspectFit"
+                        HeightRequest="90"
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width,
+                                                                          Factor=0.5,
+                                                                          Constant=-45}"
+                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Height,
+                                                                          Factor=0.5,
+                                                                          Constant=-55}"
+                        Source="maidoptions.png"
+                        WidthRequest="90">
+                        <behaviors1:Gestures.Interests>
+                            <behaviors1:GestureCollection>
+                                <behaviors1:GestureInterest GestureCommand="{Binding MaidGesture}" GestureType="SingleTap" />
+                                <behaviors1:GestureInterest GestureCommand="{Binding MaidGesture}" GestureType="LongPress" />
+                            </behaviors1:GestureCollection>
+                        </behaviors1:Gestures.Interests>
+                    </forms:CachedImage>
+                </controls:GesturesContentView>
+
+                <RelativeLayout
+                    HeightRequest="30"
+                    IsVisible="{Binding ShowMaidHint}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=0.5,
+                                                                      Constant=-40}"
+                    TranslationY="-45"
+                    WidthRequest="80">
+                    <forms:CachedImage
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="blackhint.png"
+                        WidthRequest="80" />
+                    <controls:ExtendedLabel
+                        FontSize="10"
+                        HeightRequest="30"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static resources:AppResources.Home_TapAndHold}"
+                        TextColor="{StaticResource White}"
+                        TranslationY="-2"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="80" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </ContentView>
+
+        <AbsoluteLayout
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding IsShowActions}"
+            VerticalOptions="FillAndExpand">
+            <homeView:AdditionalActionView
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                BindingContext="{Binding .}" />
+        </AbsoluteLayout>
+    </Grid>
+
+</mvvm:BaseView>

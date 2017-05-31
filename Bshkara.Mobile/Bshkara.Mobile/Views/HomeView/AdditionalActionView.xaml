@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<RelativeLayout x:Class="Bshkara.Mobile.Views.HomeView.AdditionalActionView"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+                xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+                xmlns:controls1="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+                xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <BoxView BackgroundColor="White"
+             Opacity="0.8"
+             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                    Property=Height}"
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Width}" />
+
+    <Grid
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                 Property=Height}"
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                Property=Width}"
+        RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="120" />
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="Center"
+                         Spacing="10"
+                         TranslationY="30"
+                         VerticalOptions="CenterAndExpand">
+                <controls:ExtendedLabel FontSize="32"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Surprise Me!"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                    <controls:ExtendedLabel.Behaviors>
+                        <behaviors:TapBehavior />
+                    </controls:ExtendedLabel.Behaviors>
+
+                </controls:ExtendedLabel>
+
+                <controls:ExtendedLabel FontSize="32"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Add Review"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                    <controls:ExtendedLabel.Behaviors>
+                        <behaviors:TapBehavior />
+                    </controls:ExtendedLabel.Behaviors>
+
+                </controls:ExtendedLabel>
+
+                <controls:ExtendedLabel FontSize="32"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="My Favorit Maids"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                    <controls:ExtendedLabel.Behaviors>
+                        <behaviors:TapBehavior />
+                    </controls:ExtendedLabel.Behaviors>
+
+                </controls:ExtendedLabel>
+
+                <controls:ExtendedLabel FontSize="32"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="More"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                    <controls:ExtendedLabel.Behaviors>
+                        <behaviors:TapBehavior />
+                    </controls:ExtendedLabel.Behaviors>
+
+                </controls:ExtendedLabel>
+            </StackLayout>
+
+            <RelativeLayout Grid.Row="1">
+                <controls1:BshkaraImageButton Aspect="AspectFit"
+                                              HeightRequest="70"
+                                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Width,
+                                                                                                Factor=0.5,
+                                                                                                Constant=-140}"
+                                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Height,
+                                                                                                Factor=1,
+                                                                                                Constant=-70}"
+                                              Source="surprise_me.png"
+                                              WidthRequest="70" />
+
+                <controls1:BshkaraImageButton Aspect="AspectFit"
+                                              HeightRequest="70"
+                                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Width,
+                                                                                                Factor=0.5,
+                                                                                                Constant=70}"
+                                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Height,
+                                                                                                Factor=1,
+                                                                                                Constant=-70}"
+                                              Source="more.png"
+                                              WidthRequest="70" />
+
+                <controls1:BshkaraImageButton Aspect="AspectFit"
+                                              HeightRequest="70"
+                                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Width,
+                                                                                                Factor=0.5,
+                                                                                                Constant=-77.5}"
+                                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Height,
+                                                                                                Factor=1,
+                                                                                                Constant=-120}"
+                                              Source="my_favorit.png"
+                                              WidthRequest="70" />
+
+                <controls1:BshkaraImageButton Aspect="AspectFit"
+                                              HeightRequest="70"
+                                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Width,
+                                                                                                Factor=0.5,
+                                                                                                Constant=7.5}"
+                                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                                Property=Height,
+                                                                                                Factor=1,
+                                                                                                Constant=-120}"
+                                              Source="add_review.png"
+                                              WidthRequest="70" />
+
+            </RelativeLayout>
+
+        </Grid>
+
+        <ContentView Grid.Row="1">
+            <RelativeLayout>
+                <forms:CachedImage Aspect="AspectFit"
+                                   HeightRequest="90"
+                                   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                     Property=Width,
+                                                                                     Factor=0.5,
+                                                                                     Constant=-45}"
+                                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                     Property=Height,
+                                                                                     Factor=0.5,
+                                                                                     Constant=-55}"
+                                   Source="maidoptions.png"
+                                   WidthRequest="90">
+                    <forms:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowPreviousViewCommand}" />
+                    </forms:CachedImage.GestureRecognizers>
+                </forms:CachedImage>
+
+            </RelativeLayout>
+        </ContentView>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding ShowPreviousViewCommand}" />
+        </Grid.GestureRecognizers>
+    </Grid>
+
+</RelativeLayout>

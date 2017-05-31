@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ViewCell
+    x:Class="Bshkara.Mobile.Views.HomeView.MaidViewCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:controls1="clr-namespace:Bshkara.Mobile.Controls;assembly=Bshkara.Mobile"
+    xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:roundedBoxView="clr-namespace:Bshkara.Mobile.Controls.RoundedBoxView;assembly=Bshkara.Mobile">
+
+    <Grid
+        Padding="10,5"
+        BackgroundColor="White"
+        ColumnSpacing="5"
+        RowSpacing="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5" />
+        </Grid.RowDefinitions>
+
+        <!--  Maid picture  -->
+        <RelativeLayout Grid.Row="0">
+            <forms:CachedImage
+                x:Name="Photo"
+                Aspect="AspectFill"
+                CacheType="Disk"
+                DownsampleHeight="120"
+                DownsampleWidth="120"
+                HeightRequest="120"
+                LoadingPlaceholder="image_placeholder.png"
+                WidthRequest="120" />
+
+            <forms:CachedImage
+                Aspect="AspectFill"
+                CacheType="Memory"
+                HeightRequest="120"
+                LoadingPriority="Highest"
+                Source="image_border.png"
+                WidthRequest="120" />
+
+            <roundedBoxView:RoundedBoxView
+                CornerRadius="11.5"
+                HeightRequest="23"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=X,
+                                                                  Factor=0,
+                                                                  Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0,
+                                                                  Constant=100}"
+                WidthRequest="80">
+                <roundedBoxView:RoundedBoxView.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Availability}"
+                        TargetType="roundedBoxView:RoundedBoxView"
+                        Value="False">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Red}" />
+                    </DataTrigger>
+                    <DataTrigger
+                        Binding="{Binding Availability}"
+                        TargetType="roundedBoxView:RoundedBoxView"
+                        Value="True">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Green}" />
+                    </DataTrigger>
+                </roundedBoxView:RoundedBoxView.Triggers>
+            </roundedBoxView:RoundedBoxView>
+
+            <controls:ExtendedLabel
+                FontSize="12"
+                HeightRequest="25"
+                HorizontalTextAlignment="Center"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=X,
+                                                                  Factor=0,
+                                                                  Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0,
+                                                                  Constant=100}"
+                TextColor="White"
+                VerticalTextAlignment="Center"
+                WidthRequest="80">
+
+                <controls:ExtendedLabel.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Availability}"
+                        TargetType="controls:ExtendedLabel"
+                        Value="False">
+                        <Setter Property="Text" Value="BOOKED" />
+                    </DataTrigger>
+                    <DataTrigger
+                        Binding="{Binding Availability}"
+                        TargetType="controls:ExtendedLabel"
+                        Value="True">
+                        <Setter Property="Text" Value="AVAILABLE" />
+                    </DataTrigger>
+                </controls:ExtendedLabel.Triggers>
+            </controls:ExtendedLabel>
+
+        </RelativeLayout>
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            Padding="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Name and adress  -->
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                Spacing="0">
+                <controls:ExtendedLabel
+                    FontSize="14"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Name}"
+                    TextColor="{StaticResource Primary}" />
+                <controls:ExtendedLabel
+                    FontSize="10"
+                    LineBreakMode="WordWrap"
+                    Text="{Binding Address}"
+                    TextColor="{StaticResource Gray}" />
+            </StackLayout>
+
+            <RelativeLayout Grid.Row="0" Grid.Column="1">
+                <roundedBoxView:RoundedBoxView
+                    BackgroundColor="{StaticResource Blue}"
+                    CornerRadius="11.5"
+                    HeightRequest="23"
+                    WidthRequest="80" />
+
+                <controls:ExtendedLabel
+                    FontSize="10"
+                    HeightRequest="25"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Salary, StringFormat='{0} AED'}"
+                    TextColor="White"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="80" />
+            </RelativeLayout>
+
+            <controls1:Skills
+                x:Name="SkillsControl"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="0,0,30,0"
+                HeightRequest="21"
+                ItemsSource="{Binding Skills}" />
+
+            <Grid
+                Grid.Row="2"
+                Grid.Column="0"
+                ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout
+                    Grid.Column="0"
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <fontAwesomeIcon:FontAwesomeIcon
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Icon="fa-globe"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Languages, Converter={StaticResource EnumerableCountConverter}, StringFormat='+{0}'}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <fontAwesomeIcon:FontAwesomeIcon
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Icon="fa-briefcase"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding EmploymentHistory, Converter={StaticResource EnumerableCountConverter}, StringFormat='+{0}'}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Column="2"
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <fontAwesomeIcon:FontAwesomeIcon
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Icon="fa-history"
+                        TextColor="{StaticResource Gray}"
+                        VerticalTextAlignment="Center" />
+
+                    <controls:ExtendedLabel
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding DateOfBirth, Converter={StaticResource YearsFromDateConverter}}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+            </Grid>
+
+            <fontAwesomeIcon:FontAwesomeIcon
+                Grid.Row="1"
+                Grid.Column="1"
+                FontSize="30"
+                HorizontalTextAlignment="End"
+                Icon="fa-angle-right"
+                TextColor="{StaticResource Gray}"
+                VerticalTextAlignment="Center" />
+
+            <controls:ExtendedLabel
+                Grid.Row="2"
+                Grid.Column="1"
+                FontSize="15"
+                HorizontalTextAlignment="End"
+                Text="{Binding Religion}"
+                TextColor="{StaticResource Gray}"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <BoxView
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource Accent}" />
+    </Grid>
+</ViewCell>

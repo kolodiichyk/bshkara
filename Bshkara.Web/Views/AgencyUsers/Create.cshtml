@@ -1,0 +1,10 @@
+﻿@model Bshkara.Core.Entities.AgencyUserEntity
+
+@{
+    ViewBag.Title = "Add agency user";
+}
+
+@using (Html.BeginForm("Create", "AgencyUsers", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

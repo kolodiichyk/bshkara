@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<mvvm:BaseView
+    x:Class="Bshkara.Mobile.Views.ImageViewerView.ImageViewerView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Bshkara.Mobile.Helpers.Behaviors;assembly=Bshkara.Mobile"
+    xmlns:carouselLayout="clr-namespace:Bshkara.Mobile.Controls.CarouselLayout;assembly=Bshkara.Mobile"
+    xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+    xmlns:fontAwesomeIcon="clr-namespace:Bshkara.Mobile.Controls.FontAwesomeIcon;assembly=Bshkara.Mobile"
+    xmlns:imageViewerView="clr-namespace:Bshkara.Mobile.Views.ImageViewerView;assembly=Bshkara.Mobile"
+    xmlns:mvvm="clr-namespace:XLabs.Forms.Mvvm;assembly=XLabs.Forms"
+    xmlns:toolbar="clr-namespace:Bshkara.Mobile.Controls.Toolbar;assembly=Bshkara.Mobile"
+    BackgroundColor="{StaticResource Black}">
+
+    <ContentPage.Behaviors>
+        <behaviors:HideNavigationBehavior />
+    </ContentPage.Behaviors>
+
+    <RelativeLayout>
+        <carouselLayout:CarouselLayout
+            x:Name="CarouselSwipeLayout"
+            ItemsSource="{Binding Views}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Height}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <carouselLayout:CarouselLayout.ItemTemplate>
+                <DataTemplate>
+                    <imageViewerView:ImageView />
+                </DataTemplate>
+            </carouselLayout:CarouselLayout.ItemTemplate>
+
+            <carouselLayout:CarouselLayout.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="0, 0, 0, 0"
+                    WinPhone="0, 0, 0, 0"
+                    iOS="0, 0, 0, 0" />
+            </carouselLayout:CarouselLayout.Padding>
+        </carouselLayout:CarouselLayout>
+
+        <Grid
+            Padding="20,0"
+            HeightRequest="20"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Constant=-50}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <controls:ExtendedLabel
+                Grid.Column="0"
+                FontSize="16"
+                HorizontalOptions="StartAndExpand"
+                HorizontalTextAlignment="Start"
+                IsVisible="{Binding PreviousVisibility}"
+                Text="Previous"
+                TextColor="{StaticResource White}"
+                VerticalTextAlignment="Center">
+                <controls:ExtendedLabel.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PreviousCommand}" />
+                </controls:ExtendedLabel.GestureRecognizers>
+            </controls:ExtendedLabel>
+
+            <controls:ExtendedLabel
+                Grid.Column="1"
+                FontSize="16"
+                HorizontalTextAlignment="Center"
+                Text="{Binding CountOf}"
+                TextColor="{StaticResource White}"
+                VerticalTextAlignment="Center" />
+
+            <controls:ExtendedLabel
+                Grid.Column="2"
+                FontSize="16"
+                HorizontalOptions="EndAndExpand"
+                HorizontalTextAlignment="End"
+                IsVisible="{Binding NextVisibility}"
+                Text="Next"
+                TextColor="{StaticResource White}"
+                VerticalTextAlignment="Center">
+                <controls:ExtendedLabel.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NextCommand}" />
+                </controls:ExtendedLabel.GestureRecognizers>
+            </controls:ExtendedLabel>
+        </Grid>
+
+        <toolbar:Toolbar
+            BackgroundColor="Transparent"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width}"
+            ShowDropDownIcon="False"
+            TranslationY="0">
+
+            <toolbar:Toolbar.LeftToolbarItems>
+                <fontAwesomeIcon:FontAwesomeIcon
+                    FontSize="30"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
+                    Icon="fa-angle-left"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="40">
+                    <fontAwesomeIcon:FontAwesomeIcon.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </fontAwesomeIcon:FontAwesomeIcon.GestureRecognizers>
+                </fontAwesomeIcon:FontAwesomeIcon>
+            </toolbar:Toolbar.LeftToolbarItems>
+        </toolbar:Toolbar>
+
+    </RelativeLayout>
+
+</mvvm:BaseView>
